@@ -152,6 +152,7 @@
 		624B829D1EE5710E006C3C03 /* RCTMessageListViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 623EA9811EE55CB200EC43AE /* RCTMessageListViewManager.m */; };
 		624B82DB1EE57482006C3C03 /* RCTMessageListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 623EA9801EE55CB200EC43AE /* RCTMessageListView.xib */; };
 		624B82DD1EE57653006C3C03 /* RCTAuroraIMUIModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 623EA9771EE55CB200EC43AE /* RCTAuroraIMUIModule.m */; };
+		6A40AB1E1FB2B95700946CE9 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A40AB1F1FB2B95700946CE9 /* libRCTWebSocket.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -340,6 +341,7 @@
 		623EA9A11EE55D0800EC43AE /* RCTAuroraIMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RCTAuroraIMUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		623EA9A61EE55D0800EC43AE /* RCTAuroraIMUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTAuroraIMUITests.m; sourceTree = "<group>"; };
 		623EA9A81EE55D0800EC43AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A40AB1F1FB2B95700946CE9 /* libRCTWebSocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRCTWebSocket.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -354,6 +356,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A40AB1E1FB2B95700946CE9 /* libRCTWebSocket.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,6 +719,7 @@
 				623EA96F1EE55CB200EC43AE /* RCTAuroraIMUI */,
 				623EA9A51EE55D0800EC43AE /* RCTAuroraIMUITests */,
 				626021F81ED96BA20038AB20 /* Products */,
+				6A40AB1D1FB2B95700946CE9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -727,6 +731,14 @@
 				623EA9A11EE55D0800EC43AE /* RCTAuroraIMUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6A40AB1D1FB2B95700946CE9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6A40AB1F1FB2B95700946CE9 /* libRCTWebSocket.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
