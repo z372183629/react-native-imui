@@ -2,8 +2,9 @@
  * Created by dowin on 2017/8/3.
  */
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {View, requireNativeComponent,NativeModules} from 'react-native';
+import PropTypes from 'prop-types';
 const { RecordView } = NativeModules;
 
 export default class RCTTimerTip extends Component {
