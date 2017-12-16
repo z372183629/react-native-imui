@@ -25,6 +25,7 @@
 
         <FrameLayout
             android:id="@+id/imui_layout_voice"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
@@ -100,7 +101,7 @@
                 android:id="@+id/imui_layout_send"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:visibility="invisible">
+                android:visibility="visible">
 
                 <ImageButton
                     android:id="@+id/imui_item_send"
@@ -128,19 +129,19 @@
                     tools:text="11" />
             </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/imui_layout_action"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+            <!--<FrameLayout-->
+                <!--android:id="@+id/imui_layout_action"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent">-->
 
-                <ImageButton
-                    android:id="@+id/imui_item_action"
-                    style="@style/ChatInputIcon"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/nim_message_button_bottom_add_selector"
-                    android:clickable="false" />
-            </FrameLayout>
+                <!--<ImageButton-->
+                    <!--android:id="@+id/imui_item_action"-->
+                    <!--style="@style/ChatInputIcon"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:adjustViewBounds="true"-->
+                    <!--android:background="@drawable/nim_message_button_bottom_add_selector"-->
+                    <!--android:clickable="false" />-->
+            <!--</FrameLayout>-->
         </RelativeLayout>
 
         <android.support.v4.widget.Space

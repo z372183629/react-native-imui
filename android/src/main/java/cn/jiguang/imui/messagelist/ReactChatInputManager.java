@@ -112,7 +112,7 @@ public class ReactChatInputManager extends ViewGroupManager<ChatInputView> {
         chatInput.setMenuClickListener(new OnMenuClickListener() {
             @Override
             public boolean onSendTextMessage(CharSequence input) {
-                if (input.length() == 0) {
+                if (input == null || input.length() == 0) {
                     return false;
                 }
                 WritableMap event = Arguments.createMap();
@@ -149,6 +149,9 @@ public class ReactChatInputManager extends ViewGroupManager<ChatInputView> {
                 WritableMap event = Arguments.createMap();
                 event.putInt("inputHeight", inputHeight);
                 event.putInt("showType", showType);
+                if (inputHeight < 100) { // 修复 Android 收掉弹框后，无法再弹起的问题
+                    chatInput.dismissSoftInputAndShowMenu();
+                }
                 reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(chatInput.getId(), ON_SHOW_KEY_BOARD_EVENT, event);
             }
         });
