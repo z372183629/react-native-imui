@@ -45,8 +45,8 @@
             android:layout_height="match_parent" />
 
         <FrameLayout
-            android:layout_height="match_parent"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingBottom="5dp"
             android:paddingTop="5dp">
@@ -81,21 +81,24 @@
         <android.support.v4.widget.Space
             android:layout_width="@dimen/imui_chat_space"
             android:layout_height="match_parent" />
-        <FrameLayout
-        android:id="@+id/imui_layout_emoji"
-        android:layout_width="wrap_content"
-            android:visibility="gone"
-        android:layout_height="match_parent">
 
-        <ImageButton
-        android:id="@+id/imui_item_emoji"
-        style="@style/ChatInputIcon"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
-        android:clickable="false"
-        android:scaleType="fitCenter"
-        android:src="@drawable/nim_message_button_bottom_emoji_selector" />
+        <FrameLayout
+            android:id="@+id/imui_layout_emoji"
+            android:layout_marginRight="-15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/imui_item_emoji"
+                style="@style/ChatInputIcon"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:scaleType="fitCenter"
+                android:src="@drawable/nim_message_button_bottom_emoji_selector" />
         </FrameLayout>
+
         <android.support.v4.widget.Space
             android:layout_width="@dimen/imui_chat_space"
             android:layout_height="match_parent" />
