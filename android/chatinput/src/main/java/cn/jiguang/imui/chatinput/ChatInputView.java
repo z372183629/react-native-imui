@@ -65,7 +65,7 @@ public class ChatInputView extends LinearLayout {
 
     private ImageButton mVoiceBtn;
     private ImageButton mEmojiBtn;
-    private ImageButton mSendBtn;
+    private Button mSendBtn;
     private View mSendLayout;
     private View mActionLayout;
 
@@ -125,7 +125,7 @@ public class ChatInputView extends LinearLayout {
         mChatVoice = (Button) findViewById(R.id.imui_chat_voice);
         mVoiceBtn = (ImageButton) findViewById(R.id.imui_item_voice);
         mEmojiBtn = (ImageButton) findViewById(R.id.imui_item_emoji);
-        mSendBtn = (ImageButton) findViewById(R.id.imui_item_send);
+        mSendBtn = (Button) findViewById(R.id.imui_item_send);
 
         View voiceBtnContainer = findViewById(R.id.imui_layout_voice);
         View emojiBtnContainer = findViewById(R.id.imui_layout_emoji);
