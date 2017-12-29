@@ -81,7 +81,7 @@ public class TxtViewHolder<MESSAGE extends IMessage> extends AvatarViewHolder<ME
         mMsgTv.setTextSize(15);
         mMsgTv.setTextIsSelectable(false);
         mMsgTv.setClickable(false);
-        mMsgTv.setTextColor(mIsSender ? Color.WHITE : Color.BLACK);
+        mMsgTv.setTextColor(mIsSender ? Color.BLACK : Color.BLACK);
         mMsgTv.setLinkTextColor(mIsSender ? Color.parseColor("#bbdcff") : Color.parseColor("#238dfa"));
 
     }
