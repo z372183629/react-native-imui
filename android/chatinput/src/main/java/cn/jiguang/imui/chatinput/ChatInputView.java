@@ -168,6 +168,10 @@ public class ChatInputView extends LinearLayout {
         initKeyboard();
     }
 
+    public void setOnFocusChangeListener(OnFocusChangeListener listener) {
+        mChatInput.setOnFocusChangeListener(listener);
+    }
+
     private void init(Context context, AttributeSet attrs) {
         init(context);
         mStyle = ChatInputStyle.parse(context, attrs);
