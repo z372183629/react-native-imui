@@ -109,10 +109,9 @@
 
             <FrameLayout
                 android:id="@+id/imui_layout_send"
+                android:visibility="visible"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:visibility="invisible">
-
+                android:layout_height="match_parent">
                 <Button
                     android:id="@+id/imui_item_send"
                     style="@style/ChatInputIcon"
