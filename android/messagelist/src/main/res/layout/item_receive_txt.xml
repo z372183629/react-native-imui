@@ -21,10 +21,11 @@
             style="@style/aurora_msgitem_display_name_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_toRightOf="@id/aurora_iv_msgitem_avatar" />
 
         <TextView
-            android:layout_marginTop="@dimen/aurora_message_padding_top"
+            android:layout_marginTop="16dp"
             android:id="@+id/aurora_tv_msgitem_message"
             style="@style/aurora_msgitem_msg_txt_style"
             android:autoLink="all"
@@ -32,6 +33,8 @@
             android:textIsSelectable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.1"
+            android:padding="10dp"
             android:layout_below="@id/aurora_tv_msgitem_display_name"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/aurora_iv_msgitem_avatar"

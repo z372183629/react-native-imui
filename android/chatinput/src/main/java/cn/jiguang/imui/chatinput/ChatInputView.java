@@ -399,8 +399,8 @@ public class ChatInputView extends LinearLayout {
     }
 
     void changeSendToAction(boolean action) {
-        mSendLayout.setVisibility(action ? INVISIBLE : VISIBLE);
-        mActionLayout.setVisibility(action ? VISIBLE : INVISIBLE);
+        mSendLayout.setVisibility(VISIBLE);
+//        mActionLayout.setVisibility(action ? VISIBLE : INVISIBLE);
 
     }
 
