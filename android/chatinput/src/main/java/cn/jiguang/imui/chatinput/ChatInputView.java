@@ -255,6 +255,7 @@ public class ChatInputView extends LinearLayout {
                     mListener.onFeatureView(inputHeight, showType);
                 }
                 mChatInput.requestFocus();
+                mEmojiBtn.setImageResource(R.drawable.nim_message_button_bottom_emoji_selector);
             }
             return false;
         }
@@ -490,10 +491,11 @@ public class ChatInputView extends LinearLayout {
 
     public void dismissMenuLayout() {
         mMenuContainer.setVisibility(INVISIBLE);
-        if (showType == 1) {
-            showType = 0;
-            mEmojiBtn.setImageResource(R.drawable.nim_message_button_bottom_emoji_selector);
-        }
+//        if (showType == 1) {
+//            showType = 0;
+//            mEmojiBtn.setImageResource(R.drawable.nim_message_button_bottom_emoji_selector);
+//        }
+        mEmojiBtn.setImageResource(R.drawable.nim_message_button_bottom_emoji_selector);
     }
 
     public void invisibleMenuLayout() {
