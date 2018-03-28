@@ -867,6 +867,7 @@
 					};
 					623EA9A01EE55D0800EC43AE = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 5447H98HDX;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1126,7 +1127,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5447H98HDX;
 				INFOPLIST_FILE = RCTAuroraIMUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HXHG.RCTAuroraIMUITests;
@@ -1138,7 +1139,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 5447H98HDX;
 				INFOPLIST_FILE = RCTAuroraIMUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = HXHG.RCTAuroraIMUITests;
