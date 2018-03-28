@@ -141,8 +141,6 @@
 		4E9CE01C1F9DDB1E005FC8A7 /* IMUICardMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9CE01B1F9DDB1E005FC8A7 /* IMUICardMessageCell.swift */; };
 		4EC4F96D1F46F0B1000C5CA6 /* MenuPopOverView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC4F96B1F46F0B1000C5CA6 /* MenuPopOverView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EC4F96E1F46F0B1000C5CA6 /* MenuPopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC4F96C1F46F0B1000C5CA6 /* MenuPopOverView.m */; };
-		623EA9A21EE55D0800EC43AE /* RCTAuroraIMUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623EA9991EE55D0800EC43AE /* RCTAuroraIMUI.framework */; };
-		623EA9A71EE55D0800EC43AE /* RCTAuroraIMUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 623EA9A61EE55D0800EC43AE /* RCTAuroraIMUITests.m */; };
 		623EA9A91EE55D0800EC43AE /* RCTAuroraIMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 623EA99B1EE55D0800EC43AE /* RCTAuroraIMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		623EAA331EE55D4200EC43AE /* RCTMessageListViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 623EA9811EE55CB200EC43AE /* RCTMessageListViewManager.m */; };
 		624B82901EE5710E006C3C03 /* MyMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623EA9731EE55CB200EC43AE /* MyMessageModel.swift */; };
@@ -154,16 +152,6 @@
 		624B82DD1EE57653006C3C03 /* RCTAuroraIMUIModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 623EA9771EE55CB200EC43AE /* RCTAuroraIMUIModule.m */; };
 		6A40AB1E1FB2B95700946CE9 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A40AB1F1FB2B95700946CE9 /* libRCTWebSocket.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		623EA9A31EE55D0800EC43AE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 626021EE1ED96BA20038AB20 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 623EA9981EE55D0800EC43AE;
-			remoteInfo = RCTAuroraIMUI;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		6239E6621EDDB1F700B9AC9C /* CopyFiles */ = {
@@ -338,7 +326,6 @@
 		623EA9811EE55CB200EC43AE /* RCTMessageListViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTMessageListViewManager.m; sourceTree = "<group>"; };
 		623EA9991EE55D0800EC43AE /* RCTAuroraIMUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RCTAuroraIMUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		623EA99B1EE55D0800EC43AE /* RCTAuroraIMUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTAuroraIMUI.h; sourceTree = "<group>"; };
-		623EA9A11EE55D0800EC43AE /* RCTAuroraIMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RCTAuroraIMUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		623EA9A61EE55D0800EC43AE /* RCTAuroraIMUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTAuroraIMUITests.m; sourceTree = "<group>"; };
 		623EA9A81EE55D0800EC43AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A40AB1F1FB2B95700946CE9 /* libRCTWebSocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRCTWebSocket.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -357,14 +344,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A40AB1E1FB2B95700946CE9 /* libRCTWebSocket.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		623EA99E1EE55D0800EC43AE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				623EA9A21EE55D0800EC43AE /* RCTAuroraIMUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,7 +707,6 @@
 			children = (
 				6239E6641EDDB1F700B9AC9C /* libAuroraIMUI.a */,
 				623EA9991EE55D0800EC43AE /* RCTAuroraIMUI.framework */,
-				623EA9A11EE55D0800EC43AE /* RCTAuroraIMUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -830,24 +808,6 @@
 			productReference = 623EA9991EE55D0800EC43AE /* RCTAuroraIMUI.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		623EA9A01EE55D0800EC43AE /* RCTAuroraIMUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 623EA9AD1EE55D0800EC43AE /* Build configuration list for PBXNativeTarget "RCTAuroraIMUITests" */;
-			buildPhases = (
-				623EA99D1EE55D0800EC43AE /* Sources */,
-				623EA99E1EE55D0800EC43AE /* Frameworks */,
-				623EA99F1EE55D0800EC43AE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				623EA9A41EE55D0800EC43AE /* PBXTargetDependency */,
-			);
-			name = RCTAuroraIMUITests;
-			productName = RCTAuroraIMUITests;
-			productReference = 623EA9A11EE55D0800EC43AE /* RCTAuroraIMUITests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -859,17 +819,10 @@
 				TargetAttributes = {
 					6239E6631EDDB1F700B9AC9C = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = RL64Y54S9V;
 						ProvisioningStyle = Automatic;
 					};
 					623EA9981EE55D0800EC43AE = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = RL64Y54S9V;
-						ProvisioningStyle = Automatic;
-					};
-					623EA9A01EE55D0800EC43AE = {
-						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = RL64Y54S9V;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -888,7 +841,6 @@
 			targets = (
 				6239E6631EDDB1F700B9AC9C /* AuroraIMUI */,
 				623EA9981EE55D0800EC43AE /* RCTAuroraIMUI */,
-				623EA9A01EE55D0800EC43AE /* RCTAuroraIMUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -901,13 +853,6 @@
 				4E77A3AE1F30840000098CAF /* IMUIAssets.bundle in Resources */,
 				4E77A3C51F30840000098CAF /* IMUIMessageCollectionView.xib in Resources */,
 				624B82DB1EE57482006C3C03 /* RCTMessageListView.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		623EA99F1EE55D0800EC43AE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1027,23 +972,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		623EA99D1EE55D0800EC43AE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				623EA9A71EE55D0800EC43AE /* RCTAuroraIMUITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		623EA9A41EE55D0800EC43AE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 623EA9981EE55D0800EC43AE /* RCTAuroraIMUI */;
-			targetProxy = 623EA9A31EE55D0800EC43AE /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		6239E66B1EDDB1F700B9AC9C /* Debug */ = {
@@ -1122,30 +1051,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		623EA9AE1EE55D0800EC43AE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = RCTAuroraIMUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = HXHG.RCTAuroraIMUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		623EA9AF1EE55D0800EC43AE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = RCTAuroraIMUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = HXHG.RCTAuroraIMUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1268,15 +1173,6 @@
 			buildConfigurations = (
 				623EA9AB1EE55D0800EC43AE /* Debug */,
 				623EA9AC1EE55D0800EC43AE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		623EA9AD1EE55D0800EC43AE /* Build configuration list for PBXNativeTarget "RCTAuroraIMUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				623EA9AE1EE55D0800EC43AE /* Debug */,
-				623EA9AF1EE55D0800EC43AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
