@@ -859,17 +859,14 @@
 				TargetAttributes = {
 					6239E6631EDDB1F700B9AC9C = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = RL64Y54S9V;
 						ProvisioningStyle = Automatic;
 					};
 					623EA9981EE55D0800EC43AE = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = RL64Y54S9V;
 						ProvisioningStyle = Automatic;
 					};
 					623EA9A01EE55D0800EC43AE = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = RL64Y54S9V;
 						ProvisioningStyle = Automatic;
 					};
 				};
