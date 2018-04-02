@@ -67,7 +67,7 @@ open class IMUIMessageCollectionView: UIView {
   override open func layoutSubviews() {
     super.layoutSubviews()
 //    IMUIMessageCellLayout.cellWidth = self.imui_width
-    IMUIMessageCellLayout.cellWidth = UIScreen.main.bounds.size.width
+    IMUIMessageCellLayout.cellWidth = UIScreen.main.bounds.size.width/64*25
   }
   
   func setupMessageCollectionView() {

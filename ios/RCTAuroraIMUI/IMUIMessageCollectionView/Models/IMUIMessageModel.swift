@@ -63,7 +63,7 @@ public protocol IMUIMessageDataSource {
 open class IMUIMessageModel: NSObject, IMUIMessageModelProtocol {
   
   @objc public var duration: CGFloat
-    let screenW = UIScreen.main.bounds.size.width
+    let screenW = UIScreen.main.bounds.size.width/64*25
     let screenH = UIScreen.main.bounds.size.height
   
   open var msgId = {
