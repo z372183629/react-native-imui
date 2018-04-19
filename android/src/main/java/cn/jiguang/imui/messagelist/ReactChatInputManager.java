@@ -112,7 +112,7 @@ public class ReactChatInputManager extends ViewGroupManager<ChatInputView> {
         chatInput.setMenuClickListener(new OnMenuClickListener() {
             @Override
             public boolean onSendTextMessage(CharSequence input) {
-                if (input.length() == 0) {
+                if (input == null || input.length() == 0) {
                     return false;
                 }
                 WritableMap event = Arguments.createMap();
