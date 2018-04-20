@@ -165,6 +165,8 @@ public class ChatInputView extends LinearLayout {
 
         mChatInput.setOnTouchListener(inputTouchListener);
 
+        mWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
         initKeyboard();
     }
 
