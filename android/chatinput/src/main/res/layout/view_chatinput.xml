@@ -83,10 +83,27 @@
             android:layout_height="match_parent" />
 
         <FrameLayout
-            android:id="@+id/imui_layout_emoji"
-            android:layout_marginRight="-15dp"
+            android:id="@+id/imui_layout_photo"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginRight="-10dp">
+
+            <ImageButton
+                android:id="@+id/imui_item_photo"
+                style="@style/ChatInputIcon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:background="@drawable/photo"
+                android:clickable="false"
+                android:scaleType="fitCenter" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/imui_layout_emoji"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="-17dp">
 
             <ImageButton
                 android:id="@+id/imui_item_emoji"
@@ -109,9 +126,10 @@
 
             <FrameLayout
                 android:id="@+id/imui_layout_send"
-                android:visibility="visible"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
                 <Button
                     android:id="@+id/imui_item_send"
                     style="@style/ChatInputIcon"
@@ -147,9 +165,9 @@
 
             <FrameLayout
                 android:id="@+id/imui_layout_action"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <ImageButton
                     android:id="@+id/imui_item_action"

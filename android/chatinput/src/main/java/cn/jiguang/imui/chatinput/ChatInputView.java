@@ -66,7 +66,9 @@ public class ChatInputView extends LinearLayout {
     private ImageButton mVoiceBtn;
     private ImageButton mEmojiBtn;
     private Button mSendBtn;
+    private ImageButton mPhotoBtn;
     private View mSendLayout;
+    private View mPhotoLayout;
     private View mActionLayout;
 
     private LinearLayout mChatInputContainer;
@@ -126,11 +128,14 @@ public class ChatInputView extends LinearLayout {
         mVoiceBtn = (ImageButton) findViewById(R.id.imui_item_voice);
         mEmojiBtn = (ImageButton) findViewById(R.id.imui_item_emoji);
         mSendBtn = (Button) findViewById(R.id.imui_item_send);
+        mPhotoBtn = (ImageButton) findViewById(R.id.imui_item_photo);
 
         View voiceBtnContainer = findViewById(R.id.imui_layout_voice);
         View emojiBtnContainer = findViewById(R.id.imui_layout_emoji);
         mSendLayout = findViewById(R.id.imui_layout_send);
+        mPhotoLayout = findViewById(R.id.imui_layout_photo);
         mActionLayout = findViewById(R.id.imui_layout_action);
+        mPhotoLayout.setOnClickListener(onMenuItemClickListener);
         voiceBtnContainer.setOnClickListener(onMenuItemClickListener);
         emojiBtnContainer.setOnClickListener(onMenuItemClickListener);
         mSendLayout.setOnClickListener(onMenuItemClickListener);
@@ -277,6 +282,10 @@ public class ChatInputView extends LinearLayout {
                 showType = 0;
                 if (mListener != null) {
                     mListener.onFeatureView(inputHeight, showType);
+                }
+            } else if(view.getId() == R.id.imui_layout_photo) {
+                if (mListener != null) {
+                    mListener.onPhotoClick(view);
                 }
             } else {
                 if (mMenuContainer.getVisibility() != VISIBLE) {

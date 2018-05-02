@@ -17,6 +17,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
@@ -48,6 +51,7 @@ public class ReactChatInputManager extends ViewGroupManager<ChatInputView> {
 
     private static final String REACT_CHAT_INPUT = "RCTChatInput";
     private static final String TAG = "RCTChatInput";
+    private static final String ON_PHOTO_CLICK = "onPhotoClick";
 
     private static final String ON_SEND_TEXT_EVENT = "onSendText";
     private static final String ON_SEND_VOICE = "onSendVoice";
@@ -150,6 +154,19 @@ public class ReactChatInputManager extends ViewGroupManager<ChatInputView> {
                 event.putInt("inputHeight", inputHeight);
                 event.putInt("showType", showType);
                 reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(chatInput.getId(), ON_SHOW_KEY_BOARD_EVENT, event);
+            }
+
+            @Override
+            public void onPhotoClick(View v) {
+                reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(chatInput.getId(), ON_PHOTO_CLICK, Arguments.createMap());
+                if (reactContext.getCurrentActivity() != null) {
+                    InputMethodManager imm = (InputMethodManager) reactContext.getCurrentActivity()
+                            .getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    Window window = reactContext.getCurrentActivity().getWindow();
+                    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+                            | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                }
             }
         });
 
@@ -288,6 +305,7 @@ public class ReactChatInputManager extends ViewGroupManager<ChatInputView> {
                 .put(ON_SEND_VOICE, MapBuilder.of("registrationName", ON_SEND_VOICE))
                 .put(ON_EDIT_TEXT_CHANGE_EVENT, MapBuilder.of("registrationName", ON_EDIT_TEXT_CHANGE_EVENT))
                 .put(ON_FEATURE_VIEW_EVENT, MapBuilder.of("registrationName", ON_FEATURE_VIEW_EVENT))
+                .put(ON_PHOTO_CLICK, MapBuilder.of("registrationName", ON_PHOTO_CLICK))
                 .put(ON_SHOW_KEY_BOARD_EVENT, MapBuilder.of("registrationName", ON_SHOW_KEY_BOARD_EVENT))
                 .build();
     }
