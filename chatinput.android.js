@@ -23,6 +23,7 @@ export default class ChatInput extends Component {
     this._onSendVoice = this._onSendVoice.bind(this);
     this._onShowKeyboard = this._onShowKeyboard.bind(this);
     this._onFeatureView = this._onFeatureView.bind(this);
+    this._onPhotoClick = this._onPhotoClick.bind(this);
     this._onEditTextChange = this._onEditTextChange.bind(this);
   }
 
@@ -59,6 +60,12 @@ export default class ChatInput extends Component {
       }
       this.props.onFeatureView(event.nativeEvent.inputHeight,event.nativeEvent.showType);
   }
+  _onPhotoClick(event:Event) {
+    if (!this.props.onPhotoClick) {
+      return;
+    }
+    this.props.onPhotoClick()
+  }
   _onEditTextChange(event: Event) {
     if (!this.props.onEditTextChange) {
       return;
@@ -68,13 +75,14 @@ export default class ChatInput extends Component {
 
   render() {
     return (
-      <RCTChatInput 
-          {...this.props} 
+      <RCTChatInput
+          {...this.props}
           onSendText={this._onSendText}
           onSendVideo={this._onSendVideo}
           onSendVoice={this._onSendVoice}
           onShowKeyboard={this._onShowKeyboard}
           onFeatureView={this._onFeatureView}
+          onPhotoClick={this._onPhotoClick}
           onEditTextChange={this._onEditTextChange}
       />
     );
