@@ -541,9 +541,11 @@ public class MsgListAdapter<MESSAGE extends IMessage> extends RecyclerView.Adapt
                 mLayoutManager.requestLayout();
             }
         } else {
-            List<MESSAGE> list = new ArrayList<>();
-            list.add(newMessage);
-            addToStart(list, true, false);
+            if(newMessage.getType() != MESSAGE.MessageType.RECEIVE_IMAGE && newMessage.getType() != MESSAGE.MessageType.SEND_IMAGE) {
+                List<MESSAGE> list = new ArrayList<>();
+                list.add(newMessage);
+                addToStart(list, true, false);
+            }
         }
 
     }
