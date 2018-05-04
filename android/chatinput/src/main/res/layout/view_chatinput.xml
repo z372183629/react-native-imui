@@ -91,8 +91,8 @@
             <ImageButton
                 android:id="@+id/imui_item_photo"
                 style="@style/ChatInputIcon"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:background="@drawable/photo"
                 android:clickable="false"
