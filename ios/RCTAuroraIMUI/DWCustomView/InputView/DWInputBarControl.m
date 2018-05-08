@@ -195,7 +195,7 @@
     _showMenuBtn = [[UIButton alloc]init];
     _showMenuBtn.tag = DWInputBarControlBtnTypeMenu;
     [_showMenuBtn addTarget:self action:@selector(clickControlBtn:) forControlEvents:UIControlEventTouchUpInside];
-//    [_toolView addSubview:_showMenuBtn];
+    [_toolView addSubview:_showMenuBtn];
 
     _expressionView = [[NIMInputEmoticonContainerView alloc]initWithFrame:CGRectMake(0, 0, screenW, expressionViewH)];
     _expressionView.delegate = self;
@@ -235,10 +235,10 @@
     CGFloat btnY = _toolH - 1.5*_margin - btnWH;
 //    _showRecordeBtn.frame = CGRectMake(_margin,btnY, btnWH, btnWH);
 
-//    CGFloat menuBtnX = screenW - _margin - btnWH;
-//    _showMenuBtn.frame = CGRectMake(menuBtnX, btnY, btnWH, btnWH);
+    CGFloat menuBtnX = screenW - _margin - btnWH;
+    _showMenuBtn.frame = CGRectMake(menuBtnX, btnY, btnWH, btnWH);
 
-    CGFloat expressionBtnX = screenW - 1.5*_margin - btnWH;
+    CGFloat expressionBtnX = menuBtnX - 1.5*_margin - btnWH;
     _showExpressionBtn.frame = CGRectMake(expressionBtnX, btnY, btnWH, btnWH);
 
     CGFloat inputX = CGRectGetMaxX(_showRecordeBtn.frame)+1.5*_margin;
