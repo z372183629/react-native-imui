@@ -16,13 +16,13 @@
 #define screenH [UIScreen mainScreen].bounds.size.height
 #define DESIGN_SIZE_750(length) (screenW*((length)/750.0)) //根据设计图算长度
 #define expressionViewH 216
-#define menuViewH 240
+#define menuViewH 120
 
 typedef enum{
     DWInputBarControlBtnTypeRecord = 1001,
     DWInputBarControlBtnTypeExpression,
     DWInputBarControlBtnTypeMenu
-    
+
 }DWInputBarControlBtnType;
 
 @protocol DWInputBarControlDelegate <NSObject>
