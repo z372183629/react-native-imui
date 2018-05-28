@@ -121,6 +121,7 @@ open class IMUIMessageCollectionView: UIView {
     open func scrollTo(index:Int) {
         let scrollIndex = IndexPath(item: index, section: 0)
         self.messageCollectionView.scrollToItem(at: scrollIndex, at: .top, animated: false)
+        self.messageCollectionView.setContentOffset(CGPoint(x: 0, y: self.messageCollectionView.contentOffset.y-30), animated: false);
     }
   
     
@@ -310,7 +311,7 @@ extension IMUIMessageCollectionView: UIScrollViewDelegate {
         DispatchQueue.main.async(execute: {
             self.headView.playActView()
         })
-        if scrollView.contentOffset.y < -30 {
+        if scrollView.contentOffset.y < -40 {
             isPull = true
         }else if scrollView.contentOffset.y == 0 && isPull{
 
