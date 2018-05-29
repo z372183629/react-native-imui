@@ -203,9 +203,11 @@ public class ReactMsgListManager extends ViewGroupManager<SmartRefreshLayout> im
                     }
                 }
                 if (string.startsWith("http://") || string.startsWith("https://")) {
+                    RequestOptions options = new RequestOptions()
+                            .placeholder(IdHelper.getDrawable(reactContext, "aurora_headicon_default"));
                     Glide.with(reactContext)
+                            .applyDefaultRequestOptions(options)
                             .load(string)
-                            .placeholder(IdHelper.getDrawable(reactContext, "aurora_headicon_default"))
                             .into(avatarImageView);
                 } else {
                     int resId = IdHelper.getDrawable(reactContext, string);
@@ -228,18 +230,21 @@ public class ReactMsgListManager extends ViewGroupManager<SmartRefreshLayout> im
                 }
                 if (string != null) {
                     try {
-                        RequestManager m = Glide.with(reactContext);
-                        DrawableTypeRequest request;
+                        RequestOptions options = new RequestOptions()
+                                .fitCenter()
+                                .placeholder(IdHelper.getDrawable(reactContext, "aurora_picture_not_found"))
+                                .override(imageView.getMaxWidth(), Target.SIZE_ORIGINAL);
+
+                        RequestManager m = Glide.with(reactContext).applyDefaultRequestOptions(options);
+                        RequestBuilder<Drawable> request;
 
                         if (string.startsWith("http://") || string.startsWith("https://")) {
                             request = m.load(string);
                         } else {
                             request = m.load(new File(string));
                         }
-                        request.fitCenter()
-                                .placeholder(IdHelper.getDrawable(reactContext, "aurora_picture_not_found"))
-                                .override(imageView.getMaxWidth(), Target.SIZE_ORIGINAL)
-                                .into(imageView);
+
+                        request.into(imageView);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
