@@ -7,6 +7,10 @@
 //
 
 #import "RCTAuroraIMUIModule.h"
+#import "DWShowImageVC.h"
+
+#define SCREEN_W [UIScreen mainScreen].bounds.size.width
+#define SCREEN_H [UIScreen mainScreen].bounds.size.height
 
 @interface RCTAuroraIMUIModule () {
 }
@@ -96,6 +100,56 @@ RCT_EXPORT_METHOD(clickScrollEnabled:(BOOL)isScroll) {
 
 //RCT_EXPORT_METHOD(showOrigImage:(NSString *)msgID) {
 //    [[NSNotificationCenter defaultCenter] postNotificationName:kShowOrigImageNotification object: msgID];
+//}
+
+RCT_EXPORT_METHOD(showImageView:(NSArray *)images currentIndex:(NSInteger)index){
+    NSMutableArray *imagesArr = [self formatImages:images];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIWindow *win = [UIApplication sharedApplication].keyWindow;
+        UIViewController *rootVC = win.rootViewController;
+        DWShowImageVC *vc = [[DWShowImageVC alloc]init];
+        vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        vc.imageArr = imagesArr;
+        vc.index = index+1;
+        [rootVC presentViewController:vc animated:NO completion:nil];
+    });
+}
+
+- (NSMutableArray *)formatImages:(NSArray *) images {
+    NSMutableArray *imagesArr = [NSMutableArray array];
+    for (NSMutableDictionary *image in images) {
+        //url   thumbPath   imageWidth  imageHeight   rect    msgId   displayName
+        NSMutableDictionary *imageDic = [NSMutableDictionary dictionary];
+        //NSString *thumbPath = [self findImagePath:[image objectForKey:@"thumbPath"]];
+        [imageDic setObject:@"" forKey:@"thumbPath"];
+        [imageDic setObject:image[@"uri"] forKey:@"url"];
+        [imageDic setObject:@(SCREEN_W) forKey:@"imageWidth"];
+        [imageDic setObject:@(SCREEN_H) forKey:@"imageHeight"];
+        [imageDic setObject:NSStringFromCGRect(CGRectMake(SCREEN_W*0.5-50, SCREEN_H*0.5-50, 100, 100)) forKey:@"rect"];
+        [imagesArr insertObject:imageDic atIndex:[images indexOfObject:image]];
+    }
+    return imagesArr;
+}
+
+//- (NSString*)findImagePath:(NSString *)imageURL{
+//    if (imageURL) {
+//        __block NSString *imagePath = nil;
+//        dispatch_semaphore_t semap = dispatch_semaphore_create(0);
+//        [[SDWebImageManager sharedManager] diskImageExistsForURL:[NSURL URLWithString:imageURL] completion:^(BOOL isInCache) {
+//            if (isInCache) {
+//                NSString *cacheImageKey = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:imageURL]];
+//                if (cacheImageKey.length) {
+//                    imagePath = [[SDImageCache sharedImageCache] defaultCachePathForKey:cacheImageKey];
+//                }
+//            }
+//            dispatch_semaphore_signal(semap);
+//        }];
+//        dispatch_semaphore_wait(semap, DISPATCH_TIME_FOREVER);
+//        return imagePath;
+//    }
+//    else{
+//        return nil;
+//    }
 //}
 
 @end

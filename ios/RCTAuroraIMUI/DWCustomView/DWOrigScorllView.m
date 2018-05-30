@@ -35,7 +35,7 @@
 @property (strong, nonatomic) DWOrigImageView *codeImageView;
 @property (copy, nonatomic) NSString *strScanResult;
 @property (strong, nonatomic) UIView *coverView;
-
+@property (strong, nonatomic) UILabel *pageControl;
 
 @end
 
@@ -117,6 +117,7 @@
     showIndex = index;
     [self performSelector:@selector(showBtnDelayMethod) withObject:nil afterDelay:time];
     [self setScrolViewAnimation];
+    [self resetPageControlText];
 }
 
 - (void)setScrolViewAnimation{
@@ -186,9 +187,17 @@
     [self addSubview:downBtn];
     downBtn.hidden = YES;
     [self performSelector:@selector(delayMethod) withObject:nil  afterDelay:5.0];
+    
+    _pageControl = [[UILabel alloc] initWithFrame:CGRectMake(screenW*0.5-50, 20, 100, 30)];
+    _pageControl.textColor = [UIColor whiteColor];
+    _pageControl.textAlignment = NSTextAlignmentCenter;
+    _pageControl.font = [UIFont systemFontOfSize:18];
+    [self addSubview:_pageControl];
 }
 
-
+- (void)resetPageControlText{
+    _pageControl.text = [NSString stringWithFormat:@"%ld/%ld",showIndex+1,_imgArr.count];
+}
 
 //点击
 - (void)clickTapGest{
@@ -502,6 +511,7 @@
             [_midImageView restoreView];
         }
     }
+    [self resetPageControlText];
 }
 
 #pragma mark - XXYActionSheetViewDelegate
