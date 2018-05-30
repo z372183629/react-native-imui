@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -21,9 +22,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 
-import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.dialog.CustomAlertDialog;
 import com.facebook.react.bridge.Arguments;
@@ -203,9 +205,11 @@ public class ReactMsgListManager extends ViewGroupManager<SmartRefreshLayout> im
                     }
                 }
                 if (string.startsWith("http://") || string.startsWith("https://")) {
+                    RequestOptions options = new RequestOptions()
+                            .placeholder(IdHelper.getDrawable(reactContext, "aurora_headicon_default"));
                     Glide.with(reactContext)
+                            .applyDefaultRequestOptions(options)
                             .load(string)
-                            .placeholder(IdHelper.getDrawable(reactContext, "aurora_headicon_default"))
                             .into(avatarImageView);
                 } else {
                     int resId = IdHelper.getDrawable(reactContext, string);
@@ -228,18 +232,21 @@ public class ReactMsgListManager extends ViewGroupManager<SmartRefreshLayout> im
                 }
                 if (string != null) {
                     try {
-                        RequestManager m = Glide.with(reactContext);
-                        DrawableTypeRequest request;
+                        RequestOptions options = new RequestOptions()
+                                .fitCenter()
+                                .placeholder(IdHelper.getDrawable(reactContext, "aurora_picture_not_found"))
+                                .override(imageView.getMaxWidth(), Target.SIZE_ORIGINAL);
+
+                        RequestManager m = Glide.with(reactContext).applyDefaultRequestOptions(options);
+                        RequestBuilder<Drawable> request;
 
                         if (string.startsWith("http://") || string.startsWith("https://")) {
                             request = m.load(string);
                         } else {
                             request = m.load(new File(string));
                         }
-                        request.fitCenter()
-                                .placeholder(IdHelper.getDrawable(reactContext, "aurora_picture_not_found"))
-                                .override(imageView.getMaxWidth(), Target.SIZE_ORIGINAL)
-                                .into(imageView);
+
+                        request.into(imageView);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

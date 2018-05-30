@@ -10,20 +10,22 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/pager_index"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="1/1"
-            android:textColor="#FFFFFF" />
-
         <com.dowin.imageviewer.MultiTouchViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/pager_index"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="1/1"
+        android:textSize="18sp"
+        android:background="#40000000"
+        android:textColor="#FFFFFF" />
 
     <ImageView
         android:id="@+id/download"
