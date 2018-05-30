@@ -102,7 +102,7 @@ RCT_EXPORT_METHOD(clickScrollEnabled:(BOOL)isScroll) {
 //    [[NSNotificationCenter defaultCenter] postNotificationName:kShowOrigImageNotification object: msgID];
 //}
 
-RCT_EXPORT_METHOD(showImages:(NSArray *)images currentIndex:(NSInteger)index){
+RCT_EXPORT_METHOD(showImageView:(NSArray *)images currentIndex:(NSInteger)index){
     NSMutableArray *imagesArr = [self formatImages:images];
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWindow *win = [UIApplication sharedApplication].keyWindow;
