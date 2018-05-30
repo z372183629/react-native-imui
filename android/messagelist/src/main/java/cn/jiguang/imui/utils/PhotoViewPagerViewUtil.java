@@ -10,12 +10,14 @@ import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dowin.imageviewer.DraweePagerAdapter;
@@ -35,6 +37,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import java.io.File;
 import java.util.List;
+import java.util.Locale;
 
 import cn.jiguang.imui.R;
 import cn.jiguang.imui.commons.models.IMediaFile;
