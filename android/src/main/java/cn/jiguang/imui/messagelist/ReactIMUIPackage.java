@@ -20,7 +20,6 @@ public class ReactIMUIPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> nativeModules = new ArrayList<>();
         nativeModules.add(new AuroraIMUIModule(reactContext));
-        nativeModules.add(new PhotoViewerModule(reactContext));
         return nativeModules;
     }
 

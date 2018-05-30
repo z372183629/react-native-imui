@@ -1,8 +1,11 @@
 package cn.jiguang.imui.messagelist;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -11,9 +14,16 @@ import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.uimanager.UIImplementation;
 import com.facebook.react.uimanager.UIManagerModule;
+import com.popup.tool.PopupUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.jiguang.imui.commons.models.IMediaFile;
+import cn.jiguang.imui.messagelist.module.RCTMediaFile;
 import cn.jiguang.imui.messagelist.module.RCTMember;
 import cn.jiguang.imui.messagelist.module.RCTMessage;
+import cn.jiguang.imui.utils.PhotoViewPagerViewUtil;
 
 import static cn.jiguang.imui.messagelist.MessageUtil.configChatInput;
 import static cn.jiguang.imui.messagelist.MessageUtil.configMessage;
@@ -127,4 +137,49 @@ public class AuroraIMUIModule extends ReactContextBaseJavaModule {
         getReactApplicationContext().sendBroadcast(intent);
     }
 
+    @ReactMethod
+    public void showImageView(final ReadableArray list, final int index) {
+        this.getCurrentActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                PhotoViewPagerViewUtil.show(getCurrentActivity(),getImageList(list), index, longClickListener);
+            }
+        });
+    }
+
+    private List<IMediaFile> getImageList(ReadableArray list) {
+        List<IMediaFile> imageList = new ArrayList<>(list.size());
+        for (int i = 0; i < list.size(); i++) {
+            String uri = list.getMap(i).getString("uri");
+            IMediaFile mediaFile = null;
+            String lUri = uri.toLowerCase();
+            if (lUri.startsWith("http://") || lUri.startsWith("https://")) {
+                mediaFile = new RCTMediaFile(null, null, uri);
+            }else{
+                mediaFile = new RCTMediaFile(uri, uri,null);
+            }
+            imageList.add(mediaFile);
+        }
+        return imageList;
+    }
+
+    private PhotoViewPagerViewUtil.IPhotoLongClickListener longClickListener = new PhotoViewPagerViewUtil.IPhotoLongClickListener() {
+        @Override
+        public boolean onClick(final Dialog dialog, View v, final IMediaFile mediaFile) {
+            List<String> list = new ArrayList<>();
+            list.add("保存图片");
+            list.add("取消");
+            PopupUtil.showDialog(getCurrentActivity(), null, list, new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (position == 0) {
+                        PhotoViewPagerViewUtil.saveImageToAlbum(mediaFile, getCurrentActivity());
+                    } else if (position == 1) {
+                        dialog.dismiss();
+                    }
+                }
+            });
+            return false;
+        }
+    };
 }

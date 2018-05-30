@@ -158,6 +158,27 @@ public class PhotoViewPagerViewUtil {
                 }
             }
         });
+
+        final TextView textView = (TextView) view.findViewById(R.id.pager_index);
+        final int total = list.size();
+        textView.setText(String.format(Locale.US, "%d/%d", curIndex + 1, total));
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                textView.setText(String.format(Locale.US, "%d/%d", position + 1, total));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(curIndex);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
