@@ -324,7 +324,10 @@ public class MsgListAdapter<MESSAGE extends IMessage> extends RecyclerView.Adapt
 
     private <HOLDER extends ViewHolder> ViewHolder getHolder(ViewGroup parent, @LayoutRes int layout,
                                                              Class<HOLDER> holderClass, boolean isSender) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
+//        View v = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
+//        long beginTime = System.currentTimeMillis();
+        View v = ViewHolderFactory.getInstance().getView(LayoutInflater.from(parent.getContext()), parent, layout);
+//        Log.i("MessageList", "time = " + (System.currentTimeMillis() - beginTime));
         try {
             Constructor<HOLDER> constructor = holderClass.getDeclaredConstructor(RecyclerView.Adapter.class, View.class, boolean.class);
             constructor.setAccessible(true);
@@ -543,7 +546,7 @@ public class MsgListAdapter<MESSAGE extends IMessage> extends RecyclerView.Adapt
         } else {
             // 从云端拉取的图片消息，在添加到列表之前，如果触发了消息状态更新，则会走到此处，应当忽略掉它，不可以添加到列表
             // 如果语音消息也会有这个bug，在条件判断中增加语音消息的判断
-            if(newMessage.getType() != MESSAGE.MessageType.RECEIVE_IMAGE) {
+            if (newMessage.getType() != MESSAGE.MessageType.RECEIVE_IMAGE) {
                 List<MESSAGE> list = new ArrayList<>();
                 list.add(newMessage);
                 addToStart(list, true, false);
@@ -1293,12 +1296,13 @@ public class MsgListAdapter<MESSAGE extends IMessage> extends RecyclerView.Adapt
         }
     }
 
-    private static class DefaultCardViewHolder extends CardViewHolder<IMessage>{
+    private static class DefaultCardViewHolder extends CardViewHolder<IMessage> {
 
         public DefaultCardViewHolder(RecyclerView.Adapter adapter, View itemView, boolean isSender) {
             super(adapter, itemView, isSender);
         }
     }
+
     private static class DefaultRedPacketViewHolder extends RedPacketViewHolder<IMessage> {
 
         public DefaultRedPacketViewHolder(RecyclerView.Adapter adapter, View itemView, boolean isSender) {
