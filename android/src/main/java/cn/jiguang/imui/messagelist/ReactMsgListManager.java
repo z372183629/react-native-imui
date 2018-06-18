@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -61,6 +62,7 @@ import cn.jiguang.imui.commons.models.IMessage;
 import cn.jiguang.imui.messagelist.module.RCTMessage;
 import cn.jiguang.imui.messages.MessageList;
 import cn.jiguang.imui.messages.MsgListAdapter;
+import cn.jiguang.imui.messages.ViewHolderFactory;
 import cn.jiguang.imui.utils.PhotoViewPagerViewUtil;
 import cn.jiguang.imui.utils.SessorUtil;
 
@@ -134,61 +136,9 @@ public class ReactMsgListManager extends ViewGroupManager<SmartRefreshLayout> im
         SessorUtil.getInstance(reactContext).register(true);
         mContext.registerReceiver(RCTMsgListReceiver, intentFilter);
 
-        swipeRefreshLayout = new SmartRefreshLayout(reactContext) {
-            private final Runnable measureAndLayout = new Runnable() {
-
-                int width = 0;
-                int height = 0;
-
-                @Override
-                public void run() {
-
-                    width = getWidth();
-                    height = getHeight();
-                    measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
-                            MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
-                    layout(getLeft(), getTop(), getRight(), getBottom());
-                }
-            };
-
-            @Override
-            public void requestLayout() {
-                super.requestLayout();
-                post(measureAndLayout);
-            }
-        };
         Activity activity = reactContext.getCurrentActivity();
         msgList = new MessageList(activity, null);
-        swipeRefreshLayout.addView(msgList);
 
-        final Handler handler = new Handler() {
-
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case 1:
-                        swipeRefreshLayout.finishRefresh(true);
-                        break;
-                }
-            }
-        };
-//        swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
-//        swipeRefreshLayout.setColorSchemeColors(Color.BLUE,Color.GREEN,Color.YELLOW,Color.RED);
-//        swipeRefreshLayout.setEnabled(false);
-//        swipeRefreshLayout.setRefreshStyle(SmartRefreshLayout.RefreshStyle.PINNED);
-        SmartRefreshLayout refreshLayout = swipeRefreshLayout;
-
-
-        WaterDropHeader header = new WaterDropHeader(reactContext);
-        refreshLayout.setRefreshHeader(header);
-        swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(),
-                        ON_PULL_TO_REFRESH_EVENT, null);
-                handler.sendEmptyMessageDelayed(1, 5000);
-            }
-        });
         // Use default layout
         MsgListAdapter.HoldersConfig holdersConfig = new MsgListAdapter.HoldersConfig();
         ImageLoader imageLoader = new ImageLoader() {
@@ -258,6 +208,7 @@ public class ReactMsgListManager extends ViewGroupManager<SmartRefreshLayout> im
         mAdapter = new MsgListAdapter<>("0", holdersConfig, imageLoader);
         mAdapter.setActivity(mContext.getCurrentActivity());
         msgList.setAdapter(mAdapter, 5);
+        ViewHolderFactory.getInstance().createCache(LayoutInflater.from(msgList.getContext()), msgList);
         mAdapter.setOnMsgClickListener(new MsgListAdapter.OnMsgClickListener<RCTMessage>() {
             @Override
             public void onMessageClick(RCTMessage message) {
@@ -346,6 +297,60 @@ public class ReactMsgListManager extends ViewGroupManager<SmartRefreshLayout> im
                         ON_CLICK_CHANGE_AUTO_SCROLL_EVENT, event);
             }
         });
+
+        swipeRefreshLayout = new SmartRefreshLayout(reactContext) {
+            private final Runnable measureAndLayout = new Runnable() {
+
+                int width = 0;
+                int height = 0;
+
+                @Override
+                public void run() {
+
+                    width = getWidth();
+                    height = getHeight();
+                    measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
+                            MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
+                    layout(getLeft(), getTop(), getRight(), getBottom());
+                }
+            };
+
+            @Override
+            public void requestLayout() {
+                super.requestLayout();
+                post(measureAndLayout);
+            }
+        };
+        swipeRefreshLayout.addView(msgList);
+
+        final Handler handler = new Handler() {
+
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        swipeRefreshLayout.finishRefresh(true);
+                        break;
+                }
+            }
+        };
+//        swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
+//        swipeRefreshLayout.setColorSchemeColors(Color.BLUE,Color.GREEN,Color.YELLOW,Color.RED);
+//        swipeRefreshLayout.setEnabled(false);
+//        swipeRefreshLayout.setRefreshStyle(SmartRefreshLayout.RefreshStyle.PINNED);
+        SmartRefreshLayout refreshLayout = swipeRefreshLayout;
+
+        WaterDropHeader header = new WaterDropHeader(reactContext);
+        refreshLayout.setRefreshHeader(header);
+        swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(),
+                        ON_PULL_TO_REFRESH_EVENT, null);
+                handler.sendEmptyMessageDelayed(1, 5000);
+            }
+        });
+
         return swipeRefreshLayout;
     }
 
