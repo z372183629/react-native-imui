@@ -63,6 +63,7 @@ public class ViewHolderFactory {
         List<View> list = mSparseArray.get(res);
         if (list == null || list.size() == 0) {
             createMore(layoutInflater, viewGroup, res, 1);
+            list = mSparseArray.get(res);
         }
 
         int i = list.size() - 1;
