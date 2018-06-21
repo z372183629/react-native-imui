@@ -24,9 +24,9 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
   
   public static var nameLabelSize: CGSize = CGSize(width: 200, height: 18)
   
-  public static var nameLabelOffsetToAvatar: UIOffset = UIOffset(horizontal: 4 , vertical: 0)
+  public static var nameLabelOffsetToAvatar: UIOffset = UIOffset(horizontal: 5 , vertical: 0)
   
-  public static var bubbleOffsetToAvatar: UIOffset = UIOffset(horizontal: 4 , vertical: 0)
+  public static var bubbleOffsetToAvatar: UIOffset = UIOffset(horizontal: 5 , vertical: 0)
   
   public static var cellWidth: CGFloat = 0
   
@@ -41,7 +41,7 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
   
 //  public static var bubbleMaxWidth: CGFloat = 180.0
   public static var bubbleMaxWidth: CGFloat = UIScreen.main.bounds.width*0.55
-  public static var isNeedShowInComingName = true
+  public static var isNeedShowInComingName = false
   public static var isNeedShowOutGoingName = false
   
 //  public static var isNeedShowInComingAvatar = true
@@ -337,10 +337,8 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
     
     open var durationLabelFrame: CGRect {
         var durationX: CGFloat = 0.0
-        let durationY: CGFloat = bubbleFrame.origin.y +
-            bubbleFrame.size.height/2 -
-            IMUIMessageCellLayout.durationLabelSize.height/2 + 5
-        
+        let durationY: CGFloat = bubbleFrame.origin.y + bubbleFrame.size.height/2 - IMUIMessageCellLayout.durationLabelSize.height/2 + 5
+//        let durationY: CGFloat = avatarFrame.top + IMUIMessageCellLayout.nameLabelOffsetToAvatar.vertical
         if isOutGoingMessage {
             durationX = bubbleFrame.origin.x - 5 - IMUIMessageCellLayout.durationLabelSize.width
         } else {
