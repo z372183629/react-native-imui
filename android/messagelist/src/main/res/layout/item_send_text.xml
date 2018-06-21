@@ -38,13 +38,16 @@
             android:id="@+id/aurora_tv_msgitem_message"
             style="@style/aurora_msgitem_msg_txt_style"
             android:autoLink="all"
-            android:padding="10dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="15dp"
             android:lineSpacingMultiplier="1.1"
             android:textColor="@color/white"
             android:textIsSelectable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/aurora_sendtxt_bubble"
+            android:background="@drawable/bubble_blue"
             android:text="1"/>
 
         <include layout="@layout/item_head_right"/>

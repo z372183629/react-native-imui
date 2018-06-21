@@ -29,7 +29,6 @@
         <item name="android:paddingRight">4dp</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginBottom">4dp</item>
-        <item name="android:background">@drawable/nim_bg_message_tip</item>
         <item name="android:paddingTop">2dp</item>
         <item name="android:paddingBottom">2dp</item>
         <item name="android:textSize">@dimen/aurora_size_date_text</item>
