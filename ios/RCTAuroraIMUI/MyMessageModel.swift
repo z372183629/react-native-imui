@@ -71,6 +71,21 @@ open class RCTMessageModel: IMUIMessageModel {
     bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(24, 15, 9, 10), resizingMode: .tile)
     return bubbleImg!
   }()
+    static open var blueBubbleImage: UIImage = {
+        let bundle = Bundle.imuiBundle()
+        let imagePath = bundle.path(forResource: "bubble_blue", ofType: "png")
+        var bubbleImg = UIImage(contentsOfFile: imagePath!)
+        bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(23, 40, 23, 40), resizingMode: .tile)
+        return bubbleImg!
+    }()
+    
+    static open var whiteBubbleImage: UIImage = {
+        let bundle = Bundle.imuiBundle()
+        let imagePath = bundle.path(forResource: "bubble_white", ofType: "png")
+        var bubbleImg = UIImage(contentsOfFile: imagePath!)
+        bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(23, 40, 23, 40), resizingMode: .tile)
+        return bubbleImg!
+    }()
   //时间戳转时间
    static func timeStampToString(timeStamp:String)->String {
         
@@ -144,9 +159,19 @@ open class RCTMessageModel: IMUIMessageModel {
   override open var resizableBubbleImage: UIImage {
     // return defoult message bubble
     if isOutGoing {
-      return RCTMessageModel.outgoingBubbleImage
+        if type == .image {
+            return RCTMessageModel.outgoingBubbleImage
+        }
+        else {
+            return RCTMessageModel.blueBubbleImage
+        }
     } else {
-      return RCTMessageModel.incommingBubbleImage
+        if type == .image {
+            return RCTMessageModel.incommingBubbleImage
+        }
+        else {
+            return RCTMessageModel.whiteBubbleImage
+        }
     }
   }
   
@@ -414,8 +439,8 @@ open class RCTMessageModel: IMUIMessageModel {
 //MARK - IMUIMessageCellLayoutProtocal
 open class MyMessageCellLayout: IMUIMessageCellLayout {
 
-  open static var outgoingPadding = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 14)
-  open static var incommingPadding = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 8)
+  open static var outgoingPadding = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 15)
+  open static var incommingPadding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 20)
 
   
   override init(isOutGoingMessage: Bool, isNeedShowTime: Bool, bubbleContentSize: CGSize, bubbleContentInsets: UIEdgeInsets, showAvatar: Bool) {
