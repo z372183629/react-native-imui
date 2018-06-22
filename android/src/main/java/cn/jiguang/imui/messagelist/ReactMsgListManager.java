@@ -9,10 +9,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -21,9 +23,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 
-import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.dialog.CustomAlertDialog;
 import com.facebook.react.bridge.Arguments;
@@ -59,6 +62,7 @@ import cn.jiguang.imui.commons.models.IMessage;
 import cn.jiguang.imui.messagelist.module.RCTMessage;
 import cn.jiguang.imui.messages.MessageList;
 import cn.jiguang.imui.messages.MsgListAdapter;
+import cn.jiguang.imui.messages.ViewHolderFactory;
 import cn.jiguang.imui.utils.PhotoViewPagerViewUtil;
 import cn.jiguang.imui.utils.SessorUtil;
 
@@ -132,61 +136,9 @@ public class ReactMsgListManager extends ViewGroupManager<SmartRefreshLayout> im
         SessorUtil.getInstance(reactContext).register(true);
         mContext.registerReceiver(RCTMsgListReceiver, intentFilter);
 
-        swipeRefreshLayout = new SmartRefreshLayout(reactContext) {
-            private final Runnable measureAndLayout = new Runnable() {
-
-                int width = 0;
-                int height = 0;
-
-                @Override
-                public void run() {
-
-                    width = getWidth();
-                    height = getHeight();
-                    measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
-                            MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
-                    layout(getLeft(), getTop(), getRight(), getBottom());
-                }
-            };
-
-            @Override
-            public void requestLayout() {
-                super.requestLayout();
-                post(measureAndLayout);
-            }
-        };
         Activity activity = reactContext.getCurrentActivity();
         msgList = new MessageList(activity, null);
-        swipeRefreshLayout.addView(msgList);
 
-        final Handler handler = new Handler() {
-
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case 1:
-                        swipeRefreshLayout.finishRefresh(true);
-                        break;
-                }
-            }
-        };
-//        swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
-//        swipeRefreshLayout.setColorSchemeColors(Color.BLUE,Color.GREEN,Color.YELLOW,Color.RED);
-//        swipeRefreshLayout.setEnabled(false);
-//        swipeRefreshLayout.setRefreshStyle(SmartRefreshLayout.RefreshStyle.PINNED);
-        SmartRefreshLayout refreshLayout = swipeRefreshLayout;
-
-
-        WaterDropHeader header = new WaterDropHeader(reactContext);
-        refreshLayout.setRefreshHeader(header);
-        swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(),
-                        ON_PULL_TO_REFRESH_EVENT, null);
-                handler.sendEmptyMessageDelayed(1, 5000);
-            }
-        });
         // Use default layout
         MsgListAdapter.HoldersConfig holdersConfig = new MsgListAdapter.HoldersConfig();
         ImageLoader imageLoader = new ImageLoader() {
@@ -203,9 +155,11 @@ public class ReactMsgListManager extends ViewGroupManager<SmartRefreshLayout> im
                     }
                 }
                 if (string.startsWith("http://") || string.startsWith("https://")) {
+                    RequestOptions options = new RequestOptions()
+                            .placeholder(IdHelper.getDrawable(reactContext, "aurora_headicon_default"));
                     Glide.with(reactContext)
+                            .applyDefaultRequestOptions(options)
                             .load(string)
-                            .placeholder(IdHelper.getDrawable(reactContext, "aurora_headicon_default"))
                             .into(avatarImageView);
                 } else {
                     int resId = IdHelper.getDrawable(reactContext, string);
@@ -228,18 +182,21 @@ public class ReactMsgListManager extends ViewGroupManager<SmartRefreshLayout> im
                 }
                 if (string != null) {
                     try {
-                        RequestManager m = Glide.with(reactContext);
-                        DrawableTypeRequest request;
+                        RequestOptions options = new RequestOptions()
+                                .fitCenter()
+                                .placeholder(IdHelper.getDrawable(reactContext, "aurora_picture_not_found"))
+                                .override(imageView.getMaxWidth(), Target.SIZE_ORIGINAL);
+
+                        RequestManager m = Glide.with(reactContext).applyDefaultRequestOptions(options);
+                        RequestBuilder<Drawable> request;
 
                         if (string.startsWith("http://") || string.startsWith("https://")) {
                             request = m.load(string);
                         } else {
                             request = m.load(new File(string));
                         }
-                        request.fitCenter()
-                                .placeholder(IdHelper.getDrawable(reactContext, "aurora_picture_not_found"))
-                                .override(imageView.getMaxWidth(), Target.SIZE_ORIGINAL)
-                                .into(imageView);
+
+                        request.into(imageView);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -251,6 +208,7 @@ public class ReactMsgListManager extends ViewGroupManager<SmartRefreshLayout> im
         mAdapter = new MsgListAdapter<>("0", holdersConfig, imageLoader);
         mAdapter.setActivity(mContext.getCurrentActivity());
         msgList.setAdapter(mAdapter, 5);
+        ViewHolderFactory.getInstance().createCache(LayoutInflater.from(msgList.getContext()), msgList);
         mAdapter.setOnMsgClickListener(new MsgListAdapter.OnMsgClickListener<RCTMessage>() {
             @Override
             public void onMessageClick(RCTMessage message) {
@@ -339,6 +297,60 @@ public class ReactMsgListManager extends ViewGroupManager<SmartRefreshLayout> im
                         ON_CLICK_CHANGE_AUTO_SCROLL_EVENT, event);
             }
         });
+
+        swipeRefreshLayout = new SmartRefreshLayout(reactContext) {
+            private final Runnable measureAndLayout = new Runnable() {
+
+                int width = 0;
+                int height = 0;
+
+                @Override
+                public void run() {
+
+                    width = getWidth();
+                    height = getHeight();
+                    measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
+                            MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
+                    layout(getLeft(), getTop(), getRight(), getBottom());
+                }
+            };
+
+            @Override
+            public void requestLayout() {
+                super.requestLayout();
+                post(measureAndLayout);
+            }
+        };
+        swipeRefreshLayout.addView(msgList);
+
+        final Handler handler = new Handler() {
+
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        swipeRefreshLayout.finishRefresh(true);
+                        break;
+                }
+            }
+        };
+//        swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
+//        swipeRefreshLayout.setColorSchemeColors(Color.BLUE,Color.GREEN,Color.YELLOW,Color.RED);
+//        swipeRefreshLayout.setEnabled(false);
+//        swipeRefreshLayout.setRefreshStyle(SmartRefreshLayout.RefreshStyle.PINNED);
+        SmartRefreshLayout refreshLayout = swipeRefreshLayout;
+
+        WaterDropHeader header = new WaterDropHeader(reactContext);
+        refreshLayout.setRefreshHeader(header);
+        swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(),
+                        ON_PULL_TO_REFRESH_EVENT, null);
+                handler.sendEmptyMessageDelayed(1, 5000);
+            }
+        });
+
         return swipeRefreshLayout;
     }
 
