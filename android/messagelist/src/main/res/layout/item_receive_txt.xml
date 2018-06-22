@@ -34,10 +34,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lineSpacingMultiplier="1.1"
-            android:padding="10dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="20dp"
             android:layout_below="@id/aurora_tv_msgitem_display_name"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/aurora_iv_msgitem_avatar"
-            android:background="@drawable/aurora_receivetxt_bubble" />
+            android:background="@drawable/bubble_white" />
     </RelativeLayout>
 </LinearLayout>

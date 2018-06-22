@@ -17,6 +17,7 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,6 +34,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import cn.jiguang.imui.chatinput.listener.OnClickEditTextListener;
 import cn.jiguang.imui.chatinput.listener.OnMenuClickListener;
@@ -65,7 +67,7 @@ public class ChatInputView extends LinearLayout {
 
     private ImageButton mVoiceBtn;
     private ImageButton mEmojiBtn;
-    private Button mSendBtn;
+    private ImageButton mSendBtn;
     private ImageButton mPhotoBtn;
     private View mSendLayout;
     private View mPhotoLayout;
@@ -90,7 +92,7 @@ public class ChatInputView extends LinearLayout {
     private int mHeight;
     private float density;
     private float scaleDensity;
-    public static int sMenuHeight = 666;
+    public static int sMenuHeight = 342;
 
     private boolean mShowSoftInput = false;
     private boolean isKeyboardShowed = false;
@@ -127,15 +129,15 @@ public class ChatInputView extends LinearLayout {
         mChatVoice = (Button) findViewById(R.id.imui_chat_voice);
         mVoiceBtn = (ImageButton) findViewById(R.id.imui_item_voice);
         mEmojiBtn = (ImageButton) findViewById(R.id.imui_item_emoji);
-        mSendBtn = (Button) findViewById(R.id.imui_item_send);
-        mPhotoBtn = (ImageButton) findViewById(R.id.imui_item_photo);
+        mSendBtn = (ImageButton) findViewById(R.id.imui_item_send);
+//        mPhotoBtn = (ImageButton) findViewById(R.id.imui_item_photo);
 
         View voiceBtnContainer = findViewById(R.id.imui_layout_voice);
         View emojiBtnContainer = findViewById(R.id.imui_layout_emoji);
         mSendLayout = findViewById(R.id.imui_layout_send);
-        mPhotoLayout = findViewById(R.id.imui_layout_photo);
+//        mPhotoLayout = findViewById(R.id.imui_layout_photo);
         mActionLayout = findViewById(R.id.imui_layout_action);
-        mPhotoLayout.setOnClickListener(onMenuItemClickListener);
+//        mPhotoLayout.setOnClickListener(onMenuItemClickListener);
         voiceBtnContainer.setOnClickListener(onMenuItemClickListener);
         emojiBtnContainer.setOnClickListener(onMenuItemClickListener);
         mSendLayout.setOnClickListener(onMenuItemClickListener);
@@ -283,10 +285,10 @@ public class ChatInputView extends LinearLayout {
                 if (mListener != null) {
                     mListener.onFeatureView(inputHeight, showType);
                 }
-            } else if(view.getId() == R.id.imui_layout_photo) {
-                if (mListener != null) {
-                    mListener.onPhotoClick(view);
-                }
+//            } else if(view.getId() == R.id.imui_layout_photo) {
+//                if (mListener != null) {
+//                    mListener.onPhotoClick(view);
+//                }
             } else {
                 if (mMenuContainer.getVisibility() != VISIBLE) {
                     dismissSoftInputAndShowMenu();
@@ -652,7 +654,7 @@ public class ChatInputView extends LinearLayout {
             Rect r = new Rect();
             mWindow.getDecorView().getWindowVisibleDisplayFrame(r);
             int screenHeight = mWindow.getDecorView().getRootView().getHeight();
-            int height = screenHeight - r.bottom + mChatInputContainer.getHeight();
+            int height = screenHeight - r.bottom - getVirtualBarHeigh(getContext()) + mChatInputContainer.getHeight();
 //            Log.d(TAG, "Keyboard Size: " + px2dip(height) + "-showType:" + showType);
             if (inputHeight == height) {
                 return;
@@ -669,6 +671,30 @@ public class ChatInputView extends LinearLayout {
         }
 
     };
+
+    /**
+     * 获取虚拟功能键高度
+     * @param context
+     * @return
+     */
+    public int getVirtualBarHeigh(Context context) {
+        int vh = 0;
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        try {
+            @SuppressWarnings("rawtypes")
+            Class c = Class.forName("android.view.Display");
+            @SuppressWarnings("unchecked")
+            Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
+            method.invoke(display, dm);
+            vh = dm.heightPixels - windowManager.getDefaultDisplay().getHeight();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return vh;
+    }
+
 
     public int dip2px(float dipValue) {
         return (int) (dipValue * density + 0.5f);
