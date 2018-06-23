@@ -654,7 +654,7 @@ public class ChatInputView extends LinearLayout {
             Rect r = new Rect();
             mWindow.getDecorView().getWindowVisibleDisplayFrame(r);
             int screenHeight = mWindow.getDecorView().getRootView().getHeight();
-            int height = screenHeight - r.bottom - getVirtualBarHeigh(getContext()) + mChatInputContainer.getHeight();
+            int height = screenHeight - r.bottom /* - getVirtualBarHeigh(getContext()) */ + mChatInputContainer.getHeight();
 //            Log.d(TAG, "Keyboard Size: " + px2dip(height) + "-showType:" + showType);
             if (inputHeight == height) {
                 return;
