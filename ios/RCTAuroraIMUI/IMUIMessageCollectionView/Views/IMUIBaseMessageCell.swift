@@ -74,10 +74,10 @@ open class IMUIBaseMessageCell: UICollectionViewCell, IMUIMessageCellProtocal,Me
   
   fileprivate func setupSubViews() {
     timeLabel.textAlignment = .center
-    timeLabel.textColor = UIColor.white
+    timeLabel.textColor = UIColor(red:153/255.0, green:153/255.0, blue:153/255.0, alpha:1)
     timeLabel.font = IMUIMessageCellLayout.timeStringFont
-    timeBackView.backgroundColor = UIColor.init(red: 206/255.0, green: 206/255.0, blue: 206/255.0, alpha: 1)
-    timeBackView.layer.cornerRadius = 5
+    //timeBackView.backgroundColor = UIColor.init(red: 206/255.0, green: 206/255.0, blue: 206/255.0, alpha: 1)
+    //timeBackView.layer.cornerRadius = 5
     timeBackView.clipsToBounds = true
   }
   
@@ -89,7 +89,7 @@ open class IMUIBaseMessageCell: UICollectionViewCell, IMUIMessageCellProtocal,Me
     self.timeBackView.frame = layout.timeLabelFrame
     self.timeLabel.frame = self.timeBackView.bounds
     self.avatarImage.frame = layout.avatarFrame
-    self.avatarImage.layer.cornerRadius = 5.0;
+    self.avatarImage.layer.cornerRadius = layout.avatarFrame.size.width/2;
     self.avatarImage.layer.masksToBounds = true;
     self.bubbleView.frame = layout.bubbleFrame
     self.nameLabel.frame = layout.nameLabelFrame
