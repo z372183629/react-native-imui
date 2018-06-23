@@ -108,8 +108,8 @@
     if (_currentPage != page || page == 0)
     {
         _currentPage = page;
-//        [self reloadData];
-        [self performSelector:@selector(reloadData) withObject:nil afterDelay:0.5];
+        //[self reloadData];
+        [self performSelector:@selector(reloadData) withObject:nil afterDelay:1.5];
     }
 }
 

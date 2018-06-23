@@ -88,16 +88,16 @@ static dispatch_queue_t YYLabelGetReleaseQueue() {
     CFRelease(framesetter);
     CGFloat tmpW = fitSize.width;
     CGFloat tmpH = fitSize.height;
-    if (tmpW < 30) {
-        tmpW = 50;
-    }else{
-        tmpW = tmpW + 13;
-    }
-    if (tmpH < 35) {
-        tmpH = 55;
-    }else{
-        tmpH += 40;
-    }
+//    if (tmpW < 30) {
+//        tmpW = 50;
+//    }else{
+//        tmpW = tmpW + 13;
+//    }
+//    if (tmpH < 35) {
+//        tmpH = 55;
+//    }else{
+//        tmpH += 40;
+//    }
     return CGSizeMake(tmpW, tmpH );
 }
 
@@ -142,7 +142,7 @@ static dispatch_queue_t YYLabelGetReleaseQueue() {
     }
     attrText.yy_font = self.font;
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:7];//行间距
+    [paragraphStyle setLineSpacing:5];//行间距
     [paragraphStyle setParagraphSpacing:0];
     attrText.yy_paragraphStyle = paragraphStyle;
     attrText.yy_underlineColor = underColor;
