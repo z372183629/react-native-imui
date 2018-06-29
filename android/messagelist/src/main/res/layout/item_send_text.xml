@@ -15,24 +15,30 @@
         android:gravity="right"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/aurora_ib_msgitem_resend"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/aurora_send_msg_error"
-            android:clickable="true"
-            android:scaleType="fitCenter"
-            android:visibility="gone" />
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <ProgressBar
-            android:id="@+id/aurora_pb_msgitem_sending"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="3dp"
-            android:visibility="visible"/>
+            <ImageButton
+                android:id="@+id/aurora_ib_msgitem_resend"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/aurora_send_msg_error"
+                android:clickable="true"
+                android:scaleType="fitCenter"
+                android:visibility="visible" />
+
+            <ProgressBar
+                android:id="@+id/aurora_pb_msgitem_sending"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="5dp"
+                android:visibility="visible"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/aurora_tv_msgitem_message"
@@ -40,18 +46,20 @@
             android:autoLink="all"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:lineSpacingMultiplier="1.1"
             android:textColor="@color/white"
             android:textIsSelectable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bubble_blue"
+            android:minWidth="55dp"
+            android:layout_marginLeft="50dp"
+            android:background="@drawable/drr_send_text_bubble"
             android:text="1"/>
 
         <include layout="@layout/item_head_right"/>
 
     </LinearLayout>
 
-</LinearLayout>
+</LinearLayout>c
