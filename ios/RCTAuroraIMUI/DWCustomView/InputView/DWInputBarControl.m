@@ -13,7 +13,7 @@
 //#import "DWAudioRecorderManager.h"
 #import <AVFoundation/AVFoundation.h>
 
-#define toolBackColor [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
+#define toolBackColor [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
 
 @interface DWInputBarControl ()<HPGrowingTextViewDelegate,NIMInputEmoticonProtocol>{
     UIView *line;
@@ -169,9 +169,9 @@
 
     _inputGrowView = [[HPGrowingTextView alloc]init];
     _inputGrowView.backgroundColor = toolBackColor;
-    _inputGrowView.layer.cornerRadius = 5.0f;
-    _inputGrowView.layer.borderColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1.0].CGColor;
-    _inputGrowView.layer.borderWidth = 1;
+//    _inputGrowView.layer.cornerRadius = 5.0f;
+//    _inputGrowView.layer.borderColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1.0].CGColor;
+//    _inputGrowView.layer.borderWidth = 1;
 //    _inputGrowView.minNumberOfLines = 0.5;
     _inputGrowView.maxNumberOfLines = 4;
 //    _inputGrowView.contentInset = UIEdgeInsetsMake(5, 5, 5, 5);
@@ -179,7 +179,7 @@
     _inputGrowView.enablesReturnKeyAutomatically = YES;
     _inputGrowView.font = [UIFont systemFontOfSize:15.0f];
     _inputGrowView.delegate = self;
-//    _inputGrowView.placeholder = @"点击输入文字";
+    _inputGrowView.placeholder = @"点击输入你想说的话...";
     _inputGrowView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [_toolView addSubview:_inputGrowView];
 

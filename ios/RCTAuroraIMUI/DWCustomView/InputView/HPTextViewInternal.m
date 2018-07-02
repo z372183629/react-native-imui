@@ -95,7 +95,6 @@
         insets.top = 0;
         self.contentInset = insets;
     }
-    
     [super setContentSize:contentSize];
 }
 

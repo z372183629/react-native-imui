@@ -99,6 +99,7 @@
     internalTextView.font = [UIFont fontWithName:@"Helvetica" size:13]; 
     internalTextView.contentInset = UIEdgeInsetsZero;		
     internalTextView.showsHorizontalScrollIndicator = NO;
+    internalTextView.showsVerticalScrollIndicator = NO;
     internalTextView.text = @"-";
     internalTextView.contentMode = UIViewContentModeRedraw;
     [self addSubview:internalTextView];

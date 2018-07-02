@@ -205,14 +205,13 @@ extension IMUIMessageCollectionView: UICollectionViewDelegate, UICollectionViewD
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-//    return CGSize(width: messageCollectionView.imui_width, height: chatDataManager[indexPath.item].layout.cellHeight)
     return CGSize(width: messageCollectionView.imui_width, height: chatDataManager[indexPath.item].layout.cellHeight)
   }
   
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       referenceSizeForFooterInSection section: Int) -> CGSize {
-    return CGSize.zero
+    return CGSize(width: 0, height: 10)
   }
   
   public func collectionView(_ collectionView: UICollectionView,
@@ -308,19 +307,18 @@ extension IMUIMessageCollectionView: UIScrollViewDelegate {
     self.delegate?.messageCollectionView?(self.messageCollectionView)
   }
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        DispatchQueue.main.async(execute: {
-            self.headView.playActView()
-        })
-        if scrollView.contentOffset.y < -40 {
+        if scrollView.contentOffset.y < -5 {
+            DispatchQueue.main.async(execute: {
+                self.headView.playActView()
+            })
             isPull = true
         }else if scrollView.contentOffset.y == 0 && isPull{
-
             isPull = false
             self.delegate?.messageCollectionView?(reloadMoreData:"")
         }else{
-            DispatchQueue.main.async(execute: {
-                self.headView.stopActView()
-            })
+//            DispatchQueue.main.async(execute: {
+//                self.headView.stopActView()
+//            })
         }
         let tmpH = scrollView.contentSize.height - scrollView.contentOffset.y
         if ((tmpH > 800) && isAutoScroll){

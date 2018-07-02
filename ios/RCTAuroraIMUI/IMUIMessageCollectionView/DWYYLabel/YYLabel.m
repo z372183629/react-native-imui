@@ -88,6 +88,9 @@ static dispatch_queue_t YYLabelGetReleaseQueue() {
     CFRelease(framesetter);
     CGFloat tmpW = fitSize.width;
     CGFloat tmpH = fitSize.height;
+    if (tmpW < 10) {
+        tmpW = 15;
+    }
 //    if (tmpW < 30) {
 //        tmpW = 50;
 //    }else{

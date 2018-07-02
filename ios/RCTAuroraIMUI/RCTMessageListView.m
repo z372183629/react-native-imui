@@ -247,7 +247,8 @@
     });
 }
 //添加图片message到数组
-- (void)appendImageMessage:(NSMutableDictionary *)message{
+- (void)
+appendImageMessage:(NSMutableDictionary *)message{
     NSString *strType = [message objectForKey:@"msgType"];
     if ([strType isEqualToString: @"image"]) {
         NSString *strID = [message objectForKey:@"msgId"];
