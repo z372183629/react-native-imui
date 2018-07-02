@@ -143,7 +143,7 @@ public class AvatarViewHolder<MESSAGE extends IMessage>
             layout.getLayoutParams().width = (int) (style.getWindowWidth() * style.getBubbleMaxWidth());
         }
         if(mDateTv!=null){
-            mDateTv.setTextColor(Color.parseColor("#999999"));
+            mDateTv.setTextColor(Color.WHITE);
             mDateTv.setTextSize(12);
         }
         if (!mIsSender) {

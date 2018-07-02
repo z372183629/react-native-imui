@@ -21,8 +21,7 @@
             style="@style/aurora_msgitem_display_name_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/aurora_iv_msgitem_avatar"
-            android:visibility="gone" />
+            android:layout_toRightOf="@id/aurora_iv_msgitem_avatar" />
 
         <LinearLayout
             android:id="@+id/item_layout"
