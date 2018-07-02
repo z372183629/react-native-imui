@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		34C56B0220DBA10400E858B1 /* bubble_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C56B0020DBA10300E858B1 /* bubble_white.png */; };
-		34C56B0320DBA10400E858B1 /* bubble_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C56B0120DBA10400E858B1 /* bubble_blue.png */; };
+		34F1D04D20EA0B5F0043DEAE /* bubble_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34F1D04B20EA0B5F0043DEAE /* bubble_white@2x.png */; };
+		34F1D04E20EA0B5F0043DEAE /* bubble_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34F1D04C20EA0B5F0043DEAE /* bubble_blue@2x.png */; };
 		4E1BA8841F39AB8400A15E62 /* NIMInputAtCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E1BA8821F39AB8400A15E62 /* NIMInputAtCache.h */; };
 		4E1BA8851F39AB8400A15E62 /* NIMInputAtCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1BA8831F39AB8400A15E62 /* NIMInputAtCache.m */; };
 		4E2678931F905E33007F3996 /* NIMInputEmoticonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E2678701F905C2F007F3996 /* NIMInputEmoticonParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -168,8 +168,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		34C56B0020DBA10300E858B1 /* bubble_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_white.png; sourceTree = "<group>"; };
-		34C56B0120DBA10400E858B1 /* bubble_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_blue.png; sourceTree = "<group>"; };
+		34F1D04B20EA0B5F0043DEAE /* bubble_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_white@2x.png"; sourceTree = "<group>"; };
+		34F1D04C20EA0B5F0043DEAE /* bubble_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_blue@2x.png"; sourceTree = "<group>"; };
 		4E1BA8821F39AB8400A15E62 /* NIMInputAtCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIMInputAtCache.h; sourceTree = "<group>"; };
 		4E1BA8831F39AB8400A15E62 /* NIMInputAtCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIMInputAtCache.m; sourceTree = "<group>"; };
 		4E26785E1F905C2F007F3996 /* YYTextContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YYTextContainerView.h; sourceTree = "<group>"; };
@@ -572,8 +572,8 @@
 		4E77A3731F30840000098CAF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				34C56B0120DBA10400E858B1 /* bubble_blue.png */,
-				34C56B0020DBA10300E858B1 /* bubble_white.png */,
+				34F1D04C20EA0B5F0043DEAE /* bubble_blue@2x.png */,
+				34F1D04B20EA0B5F0043DEAE /* bubble_white@2x.png */,
 				4E77A3741F30840000098CAF /* IMUIAssets.bundle */,
 			);
 			path = Assets;
@@ -856,11 +856,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34F1D04E20EA0B5F0043DEAE /* bubble_blue@2x.png in Resources */,
 				4E77A3AE1F30840000098CAF /* IMUIAssets.bundle in Resources */,
 				4E77A3C51F30840000098CAF /* IMUIMessageCollectionView.xib in Resources */,
-				34C56B0320DBA10400E858B1 /* bubble_blue.png in Resources */,
 				624B82DB1EE57482006C3C03 /* RCTMessageListView.xib in Resources */,
-				34C56B0220DBA10400E858B1 /* bubble_white.png in Resources */,
+				34F1D04D20EA0B5F0043DEAE /* bubble_white@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

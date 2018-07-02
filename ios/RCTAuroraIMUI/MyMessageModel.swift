@@ -73,17 +73,17 @@ open class RCTMessageModel: IMUIMessageModel {
   }()
     static open var blueBubbleImage: UIImage = {
         let bundle = Bundle.imuiBundle()
-        let imagePath = bundle.path(forResource: "bubble_blue", ofType: "png")
+        let imagePath = bundle.path(forResource: "bubble_blue@2x", ofType: "png")
         var bubbleImg = UIImage(contentsOfFile: imagePath!)
-        bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(23, 40, 23, 40), resizingMode: .tile)
+        bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(23, 23, 23, 23), resizingMode: .tile)
         return bubbleImg!
     }()
     
     static open var whiteBubbleImage: UIImage = {
         let bundle = Bundle.imuiBundle()
-        let imagePath = bundle.path(forResource: "bubble_white", ofType: "png")
+        let imagePath = bundle.path(forResource: "bubble_white@2x", ofType: "png")
         var bubbleImg = UIImage(contentsOfFile: imagePath!)
-        bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(23, 40, 23, 40), resizingMode: .tile)
+        bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(23, 23, 23, 23), resizingMode: .tile)
         return bubbleImg!
     }()
   //时间戳转时间
@@ -159,19 +159,21 @@ open class RCTMessageModel: IMUIMessageModel {
   override open var resizableBubbleImage: UIImage {
     // return defoult message bubble
     if isOutGoing {
-        if type == .image {
-            return RCTMessageModel.outgoingBubbleImage
-        }
-        else {
-            return RCTMessageModel.blueBubbleImage
-        }
+//        if type == .image {
+//            return RCTMessageModel.outgoingBubbleImage
+//        }
+//        else {
+//            return RCTMessageModel.blueBubbleImage
+//        }
+        return RCTMessageModel.blueBubbleImage
     } else {
-        if type == .image {
-            return RCTMessageModel.incommingBubbleImage
-        }
-        else {
-            return RCTMessageModel.whiteBubbleImage
-        }
+//        if type == .image {
+//            return RCTMessageModel.incommingBubbleImage
+//        }
+//        else {
+//            return RCTMessageModel.whiteBubbleImage
+//        }
+        return RCTMessageModel.whiteBubbleImage
     }
   }
   
@@ -439,8 +441,8 @@ open class RCTMessageModel: IMUIMessageModel {
 //MARK - IMUIMessageCellLayoutProtocal
 open class MyMessageCellLayout: IMUIMessageCellLayout {
 
-  open static var outgoingPadding = UIEdgeInsets(top: 12, left: 15, bottom: 12, right: 15)
-  open static var incommingPadding = UIEdgeInsets(top: 12, left: 15, bottom: 12, right: 15)
+  open static var outgoingPadding = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 15)
+  open static var incommingPadding = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 20)
 
   
   override init(isOutGoingMessage: Bool, isNeedShowTime: Bool, bubbleContentSize: CGSize, bubbleContentInsets: UIEdgeInsets, showAvatar: Bool) {

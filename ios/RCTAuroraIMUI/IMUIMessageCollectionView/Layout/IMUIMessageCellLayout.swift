@@ -18,7 +18,7 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
 
   public static var avatarSize: CGSize = CGSize(width: 40, height: 40)//js那边可以设置
   
-  public static var avatarOffsetToCell: UIOffset = UIOffset(horizontal: 0, vertical: 10)
+  public static var avatarOffsetToCell: UIOffset = UIOffset(horizontal: 0, vertical: 6)
   
   public static var timeLabelFrame: CGRect = CGRect.zero
   
@@ -30,8 +30,8 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
   
   public static var cellWidth: CGFloat = 0
   
-  public static var cellContentInset: UIEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom:
-    5, right: 10)
+  public static var cellContentInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom:
+    0, right: 10)
   
   public static var statusViewSize: CGSize = CGSize(width: 30, height: 30)
     
@@ -39,9 +39,9 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
   
   public static var statusViewOffsetToBubble: UIOffset = UIOffset(horizontal: 12, vertical: 0)
   
-//  public static var bubbleMaxWidth: CGFloat = 180.0
-  public static var bubbleMaxWidth: CGFloat = UIScreen.main.bounds.width*0.55
-  public static var isNeedShowInComingName = false
+  public static var bubbleMaxWidth: CGFloat = UIScreen.main.bounds.width-140
+//  public static var bubbleMaxWidth: CGFloat = UIScreen.main.bounds.width*0.55
+  public static var isNeedShowInComingName = true
   public static var isNeedShowOutGoingName = false
   
 //  public static var isNeedShowInComingAvatar = true
@@ -206,8 +206,7 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
     }
     
     let avatarY = relativeAvatarOffsetToCell.vertical +
-      self.timeLabelFrame.size.height +
-      cellContentInset.top
+      self.timeLabelFrame.size.height
     
     
     if isOutGoingMessage {
@@ -235,7 +234,7 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
       return CGRect(x: cellContentInset.left,
                     y: cellContentInset.top,
                     width: timeWidth,
-                    height: 20)
+                    height: 30)
     } else {
       return CGRect.zero
     }

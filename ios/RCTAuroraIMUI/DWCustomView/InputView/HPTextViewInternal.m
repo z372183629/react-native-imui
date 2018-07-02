@@ -95,7 +95,7 @@
         insets.top = 0;
         self.contentInset = insets;
     }
-    
+    NSArray *views = [self subviews];
     [super setContentSize:contentSize];
 }
 

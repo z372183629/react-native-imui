@@ -15,7 +15,8 @@ open class IMUITextMessageCell: IMUIBaseMessageCell {
   open static let screenW = UIScreen.main.bounds.size.width
   
     open static var outGoingTextFont = screenW<375 ? UIFont.systemFont(ofSize:15) : UIFont.systemFont(ofSize: (screenW * 16 / 375))
-  open static var inComingTextFont = screenW<375 ? UIFont.systemFont(ofSize:15) : UIFont.systemFont(ofSize: (screenW * 16 / 375))
+    //open static var inComingTextFont = screenW<375 ? UIFont.systemFont(ofSize:15) : UIFont.systemFont(ofSize: (screenW * 16 / 375))
+    open static var inComingTextFont = UIFont.systemFont(ofSize:15)
 
     var textMessageLable = YYLabel()
 
