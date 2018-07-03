@@ -235,11 +235,16 @@
     CGFloat btnY = _toolH - 1.5*_margin - btnWH;
 //    _showRecordeBtn.frame = CGRectMake(_margin,btnY, btnWH, btnWH);
 
-    CGFloat menuBtnX = screenW - _margin - btnWH;
-    _showMenuBtn.frame = CGRectMake(menuBtnX, btnY, btnWH, btnWH);
+    CGFloat gapH = 15;
+    CGFloat gapV = 10;
+    CGFloat rightBtnWH = 29;
+    CGFloat rightBtnY = (_toolH - rightBtnWH)/2;
+    
+    CGFloat menuBtnX = screenW - gapH - rightBtnWH;
+    _showMenuBtn.frame = CGRectMake(menuBtnX, rightBtnY, rightBtnWH, rightBtnWH);
 
-    CGFloat expressionBtnX = menuBtnX - 1.5*_margin - btnWH;
-    _showExpressionBtn.frame = CGRectMake(expressionBtnX, btnY, btnWH, btnWH);
+    CGFloat expressionBtnX = menuBtnX - gapH - rightBtnWH;
+    _showExpressionBtn.frame = CGRectMake(expressionBtnX, rightBtnY, rightBtnWH, rightBtnWH);
 
     CGFloat inputX = CGRectGetMaxX(_showRecordeBtn.frame)+1.5*_margin;
     CGFloat inputW = expressionBtnX - inputX - 1.5*_margin;

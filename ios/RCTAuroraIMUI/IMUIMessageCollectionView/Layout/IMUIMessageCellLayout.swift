@@ -243,8 +243,8 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
     var cellHeight =
       self.timeLabelFrame.size.height +
       self.bubbleSize.height +
-      cellContentInset.top +
-      cellContentInset.bottom
+      IMUIMessageCellLayout.cellContentInset.top +
+      IMUIMessageCellLayout.cellContentInset.bottom
 
     if self.isOutGoingMessage {
       if IMUIMessageCellLayout.isNeedShowOutGoingName  && isNeedShowOutGoingAvatar{
