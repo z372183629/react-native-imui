@@ -159,7 +159,7 @@
     [self addSubview:_toolView];
 
     line = [[UIView alloc]init];
-    line.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1.0];
+    line.backgroundColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0];
     [_toolView addSubview:line];
 
     _showRecordeBtn = [[UIButton alloc]init];
@@ -227,7 +227,7 @@
 }
 
 - (void)creatUI{
-    line.frame = CGRectMake(0, 0, screenW, 1);
+    line.frame = CGRectMake(0, 0, screenW, 0.5);
     CGFloat _margin = _defaultToolHeight*0.1;
     CGFloat btnWH = _defaultToolHeight - 3*_margin;
     _toolView.frame = CGRectMake(0, 0, screenW, _toolH);

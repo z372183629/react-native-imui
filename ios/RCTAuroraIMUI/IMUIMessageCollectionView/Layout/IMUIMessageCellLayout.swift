@@ -18,7 +18,7 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
 
   public static var avatarSize: CGSize = CGSize(width: 40, height: 40)//js那边可以设置
   
-  public static var avatarOffsetToCell: UIOffset = UIOffset(horizontal: 0, vertical: 6)
+  public static var avatarOffsetToCell: UIOffset = UIOffset(horizontal: 0, vertical: 0)
   
   public static var timeLabelFrame: CGRect = CGRect.zero
   
@@ -30,8 +30,7 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
   
   public static var cellWidth: CGFloat = 0
   
-  public static var cellContentInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom:
-    0, right: 10)
+  public static var cellContentInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 12, right: 10)
   
   public static var statusViewSize: CGSize = CGSize(width: 30, height: 30)
     
@@ -241,12 +240,12 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
   }
   
   open var cellHeight: CGFloat {
-    var cellHeight = IMUIMessageCellLayout.bubbleOffsetToAvatar.vertical +
-      IMUIMessageCellLayout.timeLabelFrame.size.height +
-      self.avatarFrame.origin.y +
+    var cellHeight =
+      self.timeLabelFrame.size.height +
       self.bubbleSize.height +
       cellContentInset.top +
       cellContentInset.bottom
+
     if self.isOutGoingMessage {
       if IMUIMessageCellLayout.isNeedShowOutGoingName  && isNeedShowOutGoingAvatar{
         cellHeight += IMUIMessageCellLayout.nameLabelSize.height + IMUIMessageCellLayout.nameLabelOffsetToAvatar.vertical
