@@ -18,6 +18,8 @@
         <LinearLayout
             android:layout_width="50dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="50dp"
             android:orientation="horizontal">
 
             <ImageButton
@@ -54,7 +56,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="55dp"
-            android:layout_marginLeft="50dp"
             android:background="@drawable/drr_send_text_bubble"
             android:text="1"/>
 
