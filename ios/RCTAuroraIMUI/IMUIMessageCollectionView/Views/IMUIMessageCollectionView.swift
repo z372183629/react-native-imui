@@ -211,7 +211,7 @@ extension IMUIMessageCollectionView: UICollectionViewDelegate, UICollectionViewD
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       referenceSizeForFooterInSection section: Int) -> CGSize {
-    return CGSize(width: 0, height: 10)
+    return CGSize.zero
   }
   
   public func collectionView(_ collectionView: UICollectionView,

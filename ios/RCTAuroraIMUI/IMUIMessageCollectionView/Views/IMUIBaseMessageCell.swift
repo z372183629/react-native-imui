@@ -100,7 +100,7 @@ open class IMUIBaseMessageCell: UICollectionViewCell, IMUIMessageCellProtocal,Me
     self.statusView = viewCache.statusViewCache.dequeue(layout: layout ) as? UIView
     self.contentView.addSubview(self.statusView!)
     self.addGestureForStatusView()
-    self.nameLabel.textColor = UIColor.init(red: 157/255.0, green: 157/255.0, blue: 158/255.0, alpha: 1)
+    self.nameLabel.textColor = UIColor.init(red: 153/255.0, green: 153/255.0, blue: 153/255.0, alpha: 1)
     self.statusView!.frame = layout.statusViewFrame
   }
   
