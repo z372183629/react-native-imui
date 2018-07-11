@@ -56,6 +56,7 @@ open class IMUIBaseMessageCell: UICollectionViewCell, IMUIMessageCellProtocal,Me
     let avatarGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapHeaderImage))
     avatarGesture.numberOfTapsRequired = 1
     avatarImage.isUserInteractionEnabled = true
+    avatarImage.contentMode = .scaleAspectFill
     avatarImage.addGestureRecognizer(avatarGesture)
     
     let longAvatarPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longTapAvatarPress(sender:)))
