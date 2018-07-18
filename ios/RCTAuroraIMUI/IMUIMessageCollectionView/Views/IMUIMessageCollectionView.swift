@@ -113,8 +113,8 @@ open class IMUIMessageCollectionView: UIView {
   }
   
   open func scrollToBottom(with animated: Bool) {
-    if chatDataManager.count == 0 { return }
-    let endIndex = IndexPath(item: chatDataManager.endIndex - 1, section: 0)
+    if self.chatDataManager.count == 0 { return }
+    let endIndex = IndexPath(item: self.chatDataManager.endIndex - 1, section: 0)
     self.messageCollectionView.scrollToItem(at: endIndex, at: .bottom, animated: animated)
   }
     
@@ -128,7 +128,9 @@ open class IMUIMessageCollectionView: UIView {
   open func appendMessage(with message: IMUIMessageModel) {
     self.chatDataManager.appendMessage(with: message)
     self.messageCollectionView.reloadData()
-//    self.scrollToBottom(with: true)
+    if isAutoScroll {
+        self.scrollToBottom(with: true)
+    }
   }
     
     open func fristAppendMessages(with messages: Array<IMUIMessageModel>) {
