@@ -81,7 +81,7 @@ public class SessorUtil implements SensorEventListener {
             currVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
             mIsEarPhoneOn = false;//AudioManager.STREAM_MUSIC
             audioManager.setSpeakerphoneOn(!mIsEarPhoneOn);
-            audioManager.setMicrophoneMute(mIsEarPhoneOn);
+//            audioManager.setMicrophoneMute(mIsEarPhoneOn);
 //            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currVolume,
 //                    AudioManager.STREAM_MUSIC);
         } else {
@@ -90,7 +90,7 @@ public class SessorUtil implements SensorEventListener {
             currVolume = audioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL);
             mIsEarPhoneOn = true;//AudioManager.STREAM_VOICE_CALL
             audioManager.setSpeakerphoneOn(!mIsEarPhoneOn);
-            audioManager.setMicrophoneMute(mIsEarPhoneOn);
+//            audioManager.setMicrophoneMute(mIsEarPhoneOn);
 //            audioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, currVolume,
 //                    AudioManager.STREAM_VOICE_CALL);
         }
