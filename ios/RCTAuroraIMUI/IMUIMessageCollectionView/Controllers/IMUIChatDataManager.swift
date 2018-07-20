@@ -76,6 +76,16 @@ class IMUIChatDataManager: NSObject {
     self.allMsgidArr.insert(message.msgId, at: 0)
     self.allMessageDic[message.msgId] = message
   }
+    
+    open func insertMessage(with message: IMUIMessageModelProtocol, index: Int) {
+        if message.msgId == "" {
+            print("the msgId is empty, cann't insert message")
+            return
+        }else if self.allMessageDic[message.msgId] == nil{
+            self.allMsgidArr.insert(message.msgId, at: index)
+        }
+        self.allMessageDic[message.msgId] = message
+    }
   
   open func insertMessages(with messages:[IMUIMessageModelProtocol]) {
     for element in messages {

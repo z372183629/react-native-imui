@@ -190,6 +190,7 @@
 }
 
 - (void)appendMessages:(NSNotification *) notification {
+    /*
   NSArray *messages = [[notification object] copy];
   
   for (NSMutableDictionary *message in messages) {
@@ -214,7 +215,37 @@
               [self.messageList appendMessageWith: messageModel];
           });
       }
-  }
+  }*/
+    NSArray *messages = [[notification object] copy];
+    for (NSMutableDictionary *message in messages) {
+        if ([message[@"msgType"] isEqualToString:@"tip"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.messageList insertMessageWith:message index:0];
+            });
+        } else {
+            NSTimeInterval msgTime = [[message objectForKey:@"timeString"] doubleValue] ;
+            if (![_strLastMsgId isEqualToString:[message objectForKey:@"msgId"]]) {
+                if ((!_lastTime)||(fabs(_lastTime-msgTime) > 180)) {
+                    _lastTime = msgTime;
+                    _strLastMsgId = [message objectForKey:@"msgId"];
+                    [message setObject:[NSNumber numberWithBool:YES] forKey:@"isShowTime"];
+                }else{
+                    [message setObject:[NSNumber numberWithBool:NO] forKey:@"isShowTime"];
+                }
+            }else{
+                [message setObject:[NSNumber numberWithBool:YES] forKey:@"isShowTime"];
+            }
+            [self appendImageMessage:message];
+            RCTMessageModel * messageModel = [self convertMessageDicToModel:message];
+            if (isShowMenuing) {
+                [self.tmpMessageArr addObject:messageModel];
+            }else{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.messageList appendMessageWith: messageModel];
+                });
+            }
+        }
+    }
 }
 
 - (void)insertMessagesToTop:(NSNotification *) notification {

@@ -132,6 +132,34 @@ open class IMUIMessageCollectionView: UIView {
         self.scrollToBottom(with: true)
     }
   }
+    //为撤销而生
+    open func insertMessage(with message: NSMutableDictionary, index: Int){
+        var delIndex: Int = -1
+        var lastShowTime: String = ""
+        for _index: Int in (0..<self.chatDataManager.allMsgidArr.endIndex).reversed() {
+            let msgId: String = self.chatDataManager.allMsgidArr[_index]
+            let chatMsg: IMUIMessageModelProtocol = self.chatDataManager.allMessageDic[msgId]!
+            if (delIndex == -1 && (message["timeString"] as! NSString).doubleValue > (chatMsg.timeStamp as NSString).doubleValue) {
+                delIndex = _index+1
+            }
+            if (delIndex != -1 && chatMsg.timeString.count > 0){
+                lastShowTime = chatMsg.timeStamp
+                break
+            }
+        }
+        if (lastShowTime == "" || fabs((message["timeString"] as! NSString).doubleValue-(lastShowTime as NSString).doubleValue)>180){
+            message["isShowTime"] = true
+        }
+        else{
+            message["isShowTime"] = false
+        }
+        let messageModel = RCTMessageModel.init(messageDic: message)
+        self.chatDataManager.insertMessage(with: messageModel, index: (delIndex == -1 ? 0 : delIndex))
+        self.messageCollectionView.reloadData()
+        if isAutoScroll {
+            self.scrollToBottom(with: true)
+        }
+    }
     
     open func fristAppendMessages(with messages: Array<IMUIMessageModel>) {
         for message in messages{
