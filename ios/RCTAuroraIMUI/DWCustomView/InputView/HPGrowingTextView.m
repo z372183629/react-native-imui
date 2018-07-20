@@ -114,7 +114,7 @@
     
     [self setMaxNumberOfLines:3];
 
-    [self setPlaceholderColor:[UIColor lightGrayColor]];
+    [self setPlaceholderColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1]];
     internalTextView.displayPlaceHolder = YES;
 }
 

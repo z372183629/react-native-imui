@@ -59,7 +59,7 @@
     if (imgH>screenH) {
         _contentScrollView.scrollEnabled = YES;
     }else{
-         _contentScrollView.scrollEnabled = NO;
+        //_contentScrollView.scrollEnabled = NO;
     }
     orginFrame = self.imgView.frame;
 }
@@ -164,24 +164,24 @@
             }];
             
             
-        }else if (view.width > 1.5 * screenW) {
-            CGFloat maxH = view.height - orginFrame.size.height*1.5;
-            CGFloat maxW = view.width - screenW*1.5;
+        }else if (view.width > 2 * screenW) {
+            CGFloat maxH = view.height - orginFrame.size.height*2;
+            CGFloat maxW = view.width - screenW*2;
             [UIView animateWithDuration:0.3 animations:^{
                 view.width -= maxW;
                 view.height -= maxH;
                 view.x += maxW*0.5;
                 view.y += maxH*0.5;
             }completion:^(BOOL finished) {
-                if (_contentScrollView.contentSize.width != orginFrame.size.width*1.5) {
+                if (_contentScrollView.contentSize.width != orginFrame.size.width*2) {
                     
-                    if (orginFrame.size.height*1.5>screenH) {
-                        _contentScrollView.contentSize = CGSizeMake(orginFrame.size.width*1.5, orginFrame.size.height*1.5);
+                    if (orginFrame.size.height*2>screenH) {
+                        _contentScrollView.contentSize = CGSizeMake(orginFrame.size.width*2, orginFrame.size.height*2);
                         _contentScrollView.contentOffset = CGPointMake(-view.x, -view.y);
                         view.x = 0;
                         view.y = 0;
                     }else{
-                        _contentScrollView.contentSize = CGSizeMake(orginFrame.size.width*1.5, screenH);
+                        _contentScrollView.contentSize = CGSizeMake(orginFrame.size.width*2, screenH);
                         _contentScrollView.contentOffset = CGPointMake(-view.x, _contentScrollView.contentOffset.y);
                         view.x = 0;
                     }
