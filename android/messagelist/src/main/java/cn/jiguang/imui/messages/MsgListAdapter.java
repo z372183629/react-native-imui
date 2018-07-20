@@ -385,6 +385,20 @@ public class MsgListAdapter<MESSAGE extends IMessage> extends RecyclerView.Adapt
         }
     }
 
+    private void innsertTipToList(MESSAGE message) {
+        if (message.getType() != IMessage.MessageType.TIP)
+            return;
+
+        for (int i = 0; i < mItems.size(); i++) {
+            MESSAGE item = (MESSAGE) mItems.get(i).item;
+            if (message.getTime() > item.getTime()) {
+                mItems.add(i, new Wrapper<>(message));
+                return;
+            }
+        }
+        mItems.add(new Wrapper<>(message));
+    }
+
     /**
      * Add message to bottom of list
      *
@@ -403,7 +417,13 @@ public class MsgListAdapter<MESSAGE extends IMessage> extends RecyclerView.Adapt
                     continue;
                 }
             }
-            mItems.add(0, new Wrapper<>(message));
+
+            if (message.getType() == IMessage.MessageType.TIP) {
+                innsertTipToList(message);
+            } else {
+                mItems.add(0, new Wrapper<>(message));
+            }
+
             notifyItemRangeInserted(0, 1);
             addImage(message, false);
         }
