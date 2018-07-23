@@ -160,8 +160,8 @@ public class MessageUtil {
             if (timeString != null) {
 
                 try {
-                    rctMsg.setTime(Long.parseLong(timeString) * 1000);
-                    rctMsg.setTimeString(TimeUtil.getTimeShowString(rctMsg.getTime(), false));
+                    rctMsg.setTime(Long.parseLong(timeString));
+                    rctMsg.setTimeString(TimeUtil.getTimeShowString(rctMsg.getTime() / 1000 * 1000, false));
                 } catch (NumberFormatException e) {
                     rctMsg.setTime(0L);
                     rctMsg.setTimeString(timeString);
