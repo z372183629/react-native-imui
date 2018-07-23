@@ -385,18 +385,19 @@ public class MsgListAdapter<MESSAGE extends IMessage> extends RecyclerView.Adapt
         }
     }
 
-    private void innsertTipToList(MESSAGE message) {
+    private int innsertTipToList(MESSAGE message) {
         if (message.getType() != IMessage.MessageType.TIP)
-            return;
+            return 0;
 
         for (int i = 0; i < mItems.size(); i++) {
             MESSAGE item = (MESSAGE) mItems.get(i).item;
             if (message.getTime() > item.getTime()) {
                 mItems.add(i, new Wrapper<>(message));
-                return;
+                return i;
             }
         }
         mItems.add(new Wrapper<>(message));
+        return 0;
     }
 
     /**
@@ -418,13 +419,14 @@ public class MsgListAdapter<MESSAGE extends IMessage> extends RecyclerView.Adapt
                 }
             }
 
+            int positionStart = 0;
             if (message.getType() == IMessage.MessageType.TIP) {
-                innsertTipToList(message);
+                positionStart = innsertTipToList(message);
             } else {
                 mItems.add(0, new Wrapper<>(message));
             }
 
-            notifyItemRangeInserted(0, 1);
+            notifyItemRangeInserted(positionStart, 1);
             addImage(message, false);
         }
 
