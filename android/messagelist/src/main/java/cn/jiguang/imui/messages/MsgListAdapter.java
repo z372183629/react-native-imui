@@ -568,7 +568,7 @@ public class MsgListAdapter<MESSAGE extends IMessage> extends RecyclerView.Adapt
         } else {
             // 从云端拉取的图片消息，在添加到列表之前，如果触发了消息状态更新，则会走到此处，应当忽略掉它，不可以添加到列表
             // 如果语音消息也会有这个bug，在条件判断中增加语音消息的判断
-            if (newMessage.getType() != MESSAGE.MessageType.RECEIVE_IMAGE) {
+            if (newMessage.getType() != MESSAGE.MessageType.RECEIVE_IMAGE && newMessage.getType() != MESSAGE.MessageType.SEND_IMAGE) {
                 List<MESSAGE> list = new ArrayList<>();
                 list.add(newMessage);
                 addToStart(list, true, false);
