@@ -518,6 +518,8 @@ public class MsgListAdapter<MESSAGE extends IMessage> extends RecyclerView.Adapt
 
     @SuppressWarnings("unchecked")
     private int getMessagePositionById(String id) {
+        if(id == null)
+            return -1;
         for (int i = 0; i < mItems.size(); i++) {
             Wrapper wrapper = mItems.get(i);
             if (wrapper.item instanceof IMessage) {
