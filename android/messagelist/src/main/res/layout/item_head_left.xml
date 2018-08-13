@@ -5,6 +5,6 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/aurora_iv_msgitem_avatar"
         style="@style/aurora_msgitem_receiver_avatar_style"
-        android:src="@drawable/aurora_headicon_default"
+        android:src="@drawable/sender_headicon_default"
         app:civ_border_width="0dp" />
 </merge>
