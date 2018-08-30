@@ -9,11 +9,11 @@
 #import "DWOrigScorllView.h"
 #import "DWActionSheetView.h"
 #import "UIView+Extend.h"
+#import "DWShowImageVC.h"
 //#import "DWContentScrollView.h"
 
 
 #define margin 20
-
 
 @interface DWOrigScorllView()<UIScrollViewDelegate,DWActionSheetViewDelegate,UIGestureRecognizerDelegate>{
     NSInteger count;
@@ -152,6 +152,7 @@
         self.backgroundColor = [UIColor clearColor];
         self.userInteractionEnabled = YES;
         [self addContentView];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(observeDeleteImage:) name:ImageViewerDeleteImage object:nil];
     }
     return self;
 }
@@ -188,7 +189,7 @@
     downBtn.hidden = YES;
     [self performSelector:@selector(delayMethod) withObject:nil  afterDelay:5.0];
     
-    _pageControl = [[UILabel alloc] initWithFrame:CGRectMake(screenW*0.5-50, 20, 100, 30)];
+    _pageControl = [[UILabel alloc] initWithFrame:CGRectMake(screenW*0.5-50, 30, 100, 30)];
     _pageControl.textColor = [UIColor whiteColor];
     _pageControl.textAlignment = NSTextAlignmentCenter;
     _pageControl.font = [UIFont systemFontOfSize:18];
@@ -329,7 +330,12 @@
 
 - (void)qrCodeWithImage:(DWOrigImageView *)orgImgView{
     _codeImageView = orgImgView;
-    NSMutableArray *titles = [NSMutableArray arrayWithObjects:@"保存图片", nil];
+    NSMutableArray *titles;
+    titles= [NSMutableArray arrayWithObjects:@"保存图片", nil];
+    
+    if(self.showDeleteBtn)
+       [titles addObject:@"删除图片"];
+    
     UIImage *image = [self imageSizeWithScreenImage:orgImgView.imgView.image];
 
     //1. 初始化扫描仪，设置设别类型和识别质量
@@ -395,6 +401,100 @@
     }
 }
 
+- (void)observeDeleteImage:(NSNotification*)noti{
+    if(_imgArr.count == 1){
+        // 关闭
+        [self.delegate origImageViewClickTap];
+        return;
+    }
+    
+    NSDictionary *dic = noti.object;
+    NSString* url = dic[@"url"];
+    if(url){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSInteger pos = 0;
+            NSMutableArray* arr = [[NSMutableArray alloc] init];
+            for(NSDictionary* imgDic in _imgArr){
+                if(![url isEqualToString:imgDic[@"url"]]){
+                    [arr addObject:imgDic];
+                }else{
+                    pos = [_imgArr indexOfObject:imgDic];
+                }
+            }
+            pos = pos < arr.count ? pos : arr.count - 1;
+            
+            [self resetWithDataArr:arr andIndex:pos];
+        });
+    }
+}
+
+- (void)resetWithDataArr:(NSArray *)arr andIndex:(NSInteger )index {
+    _imgArr = [arr copy];
+    count = _imgArr.count;
+    
+    if(_firstImageView)
+       [_firstImageView removeFromSuperview] ;
+    if(_midImageView)
+        [_midImageView removeFromSuperview];
+    if(_lastImageView)
+        [_lastImageView removeFromSuperview];
+
+    if (_imgArr.count == 1) {
+        _scrollView.contentSize = CGSizeMake(screenW, [UIScreen mainScreen].bounds.size.height);
+        [_firstImageView setupImgViewWithDict:_imgArr[0]];
+        _firstImageView.frame = CGRectMake(0, 0, screenW, screenH);
+        [_scrollView addSubview:_firstImageView];
+    }else if (_imgArr.count == 2){
+        if (index == 0) {
+            fristContentX = 0;
+        }else{
+            fristContentX = screenW+margin;
+        }
+        _scrollView.contentSize = CGSizeMake(screenW*2+margin, [UIScreen mainScreen].bounds.size.height);
+        [_firstImageView setupImgViewWithDict:_imgArr[0]];
+        _firstImageView.frame = CGRectMake(0, 0, screenW, screenH);
+        [_scrollView addSubview:_firstImageView];
+        
+        [_midImageView setupImgViewWithDict:_imgArr[1]];
+        _midImageView.frame = CGRectMake(screenW+margin, 0, screenW, screenH);
+        [_scrollView addSubview:_midImageView];
+        _scrollView.contentOffset = CGPointMake(fristContentX, 0);
+        
+    }else if (_imgArr.count > 2){
+        _scrollView.contentSize = CGSizeMake((screenW+margin)*2+screenW, [UIScreen mainScreen].bounds.size.height);
+        NSInteger fristIndex = 0;
+        NSInteger midIndex = 1;
+        NSInteger lastIndex = 2;
+        if (index == 0) {
+            fristContentX = 0;
+        }else if(index == (_imgArr.count-1)){
+            fristIndex = count - 3;
+            midIndex = count - 2;
+            lastIndex = count - 1;
+            fristContentX = (screenW+margin)*2;
+        }else{
+            fristIndex = index - 1;
+            midIndex = index;
+            lastIndex = index + 1;
+            fristContentX = screenW+margin;
+        }
+        
+        [_firstImageView setupImgViewWithDict:_imgArr[fristIndex]];
+        _firstImageView.frame = CGRectMake(0, 0, screenW, screenH);
+        [_scrollView addSubview:_firstImageView];
+        [_midImageView setupImgViewWithDict:_imgArr[midIndex]];
+        _midImageView.frame = CGRectMake(screenW+margin, 0, screenW, screenH);
+        [_scrollView addSubview:_midImageView];
+        
+        [_lastImageView setupImgViewWithDict:_imgArr[lastIndex]];
+        _lastImageView.frame = CGRectMake((screenW+margin)*2, 0, screenW, screenH);
+        [_scrollView addSubview:_lastImageView];
+        
+        _scrollView.contentOffset = CGPointMake(fristContentX, 0);
+    }
+    showIndex = index;
+    [self resetPageControlText];
+}
 
 #pragma mark -- scrollviewDelgate
 
@@ -519,7 +619,15 @@
     if (buttonIndex != actionSheet.cancelButtonIndex){
         if (buttonIndex == 0) {//保存图片
             [_codeImageView saveImage];
-        }else if(buttonIndex == 1){//识别二维码
+        }else if(buttonIndex == 1){
+            if(_showDeleteBtn){
+                [[NSNotificationCenter defaultCenter] postNotificationName:onImageViewerDeleteImage object:_imgArr[showIndex]];
+            }else{//识别二维码
+                if ([self.delegate respondsToSelector:@selector(origImageViewClickScannedImg:)]) {
+                    [self.delegate origImageViewClickScannedImg:_strScanResult];
+                }
+            }
+        }else if(buttonIndex == 2){//识别二维码
             if ([self.delegate respondsToSelector:@selector(origImageViewClickScannedImg:)]) {
                 [self.delegate origImageViewClickScannedImg:_strScanResult];
             }
