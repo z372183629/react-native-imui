@@ -49,6 +49,8 @@ import me.relex.photodraweeview.PhotoDraweeView;
  */
 
 public class PhotoViewPagerViewUtil {
+    public static final String RCT_DELETE_IMAGE_ACTION = "cn.jiguang.imui.utils.intent.deleteImage";
+
     static ImageLoader imageLoader = new ImageLoader<IMediaFile>() {
         @Override
         public void load(final PhotoDraweeView photoDraweeView, IMediaFile o) {
@@ -163,8 +165,7 @@ public class PhotoViewPagerViewUtil {
         });
 
         final TextView textView = (TextView) view.findViewById(R.id.pager_index);
-        final int total = list.size();
-        textView.setText(String.format(Locale.US, "%d/%d", curIndex + 1, total));
+        textView.setText(String.format(Locale.US, "%d/%d", curIndex + 1, adapter.getCount()));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -173,12 +174,42 @@ public class PhotoViewPagerViewUtil {
 
             @Override
             public void onPageSelected(int position) {
-                textView.setText(String.format(Locale.US, "%d/%d", position + 1, total));
+                textView.setText(String.format(Locale.US, "%d/%d", position + 1, adapter.getCount()));
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(RCT_DELETE_IMAGE_ACTION);
+        final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String url = intent.getStringExtra("url");
+                if (RCT_DELETE_IMAGE_ACTION.equals(intent.getAction()) && url != null) {
+                    for (IMediaFile mediaFile : list) {
+                        if (url.equals(mediaFile.getUrl())) {
+                            adapter.removeItem(mediaFile);
+                            if (adapter.getCount() == 0)
+                                dialog.dismiss();
+                            else
+                                textView.setText(String.format(Locale.US, "%d/%d", viewPager.getCurrentItem() + 1, adapter.getCount()));
+                            break;
+                        }
+                    }
+                }
+            }
+        };
+
+        mActivity.registerReceiver(broadcastReceiver, intentFilter);
+
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                mActivity.unregisterReceiver(broadcastReceiver);
             }
         });
 
