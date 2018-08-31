@@ -20,4 +20,7 @@
 @interface DWOrigScorllView : UIView
 + (instancetype)scrollViewWithDataArr:(NSArray *)dataArr andIndex:(NSInteger )index showDownBtnTime:(NSTimeInterval)time;
 @property (weak, nonatomic) id<DWOrigImageViewDelegate> delegate;
+
+@property (assign, nonatomic) BOOL showDeleteBtn;
+
 @end

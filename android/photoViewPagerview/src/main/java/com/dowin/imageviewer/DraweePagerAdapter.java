@@ -79,4 +79,16 @@ public class DraweePagerAdapter<T> extends PagerAdapter {
 
         return photoDraweeView;
     }
+
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
+
+    public void removeItem(T item) {
+        mDrawables.remove(item);
+        notifyDataSetChanged();
+    }
+
 }
