@@ -18,6 +18,7 @@
 @interface DWOrigImageView : UIView
 @property (strong, nonatomic) MyCacheImageView *imgView;
 @property (strong, nonatomic) UIScrollView *contentScrollView;
+@property (strong, nonatomic) NSDictionary* imageDict;
 + (instancetype)origImgViewWithDict:(NSDictionary *)dict;
 - (void)setupImgViewWithDict:(NSDictionary *)dict;
 - (void)restoreView;//复原ImageView

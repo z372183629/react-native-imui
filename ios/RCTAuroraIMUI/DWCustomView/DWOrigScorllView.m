@@ -332,8 +332,8 @@
     _codeImageView = orgImgView;
     NSMutableArray *titles;
     titles= [NSMutableArray arrayWithObjects:@"保存图片", nil];
-    
-    if(self.showDeleteBtn)
+    NSDictionary* imageDict = orgImgView.imageDict;
+    if([imageDict[@"canDelete"] isEqualToValue:@(YES)])
        [titles addObject:@"删除图片"];
     
     UIImage *image = [self imageSizeWithScreenImage:orgImgView.imgView.image];
@@ -620,7 +620,7 @@
         if (buttonIndex == 0) {//保存图片
             [_codeImageView saveImage];
         }else if(buttonIndex == 1){
-            if(_showDeleteBtn){
+            if(_codeImageView.imageDict[@"canDelete"]){
                 [[NSNotificationCenter defaultCenter] postNotificationName:onImageViewerDeleteImage object:_imgArr[showIndex]];
             }else{//识别二维码
                 if ([self.delegate respondsToSelector:@selector(origImageViewClickScannedImg:)]) {
