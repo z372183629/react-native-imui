@@ -35,7 +35,6 @@
     _scroll = [DWOrigScorllView scrollViewWithDataArr:_imageArr andIndex:(_index-1) showDownBtnTime:0.3 ];
     _scroll.delegate = self;
     _scroll.frame = CGRectMake(0, 0, screenW, screenH);
-    _scroll.showDeleteBtn = self.showDeleteBtn;
     screenWindow.windowLevel = UIWindowLevelAlert;
     [screenWindow addSubview:_scroll];
     

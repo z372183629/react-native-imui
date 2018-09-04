@@ -40,6 +40,7 @@
 
 
 - (void)setupImgViewWithDict:(NSDictionary *)dict{
+    _imageDict = dict;
     NSString *thumbPath = [dict objectForKey:@"thumbPath"];
     NSString *strUrl = [dict objectForKey:@"url"];
     UIImage *placeImg = [UIImage imageWithData:[NSData dataWithContentsOfFile:thumbPath]];
