@@ -331,10 +331,10 @@
 - (void)qrCodeWithImage:(DWOrigImageView *)orgImgView{
     _codeImageView = orgImgView;
     NSMutableArray *titles;
-    titles= [NSMutableArray arrayWithObjects:@"保存图片", nil];
+    titles= [NSMutableArray arrayWithObjects:@"保存", nil];
     NSDictionary* imageDict = orgImgView.imageDict;
     if([imageDict[@"canDelete"] isEqualToValue:@(YES)])
-       [titles addObject:@"删除图片"];
+       [titles addObject:@"删除"];
     
     UIImage *image = [self imageSizeWithScreenImage:orgImgView.imgView.image];
 
