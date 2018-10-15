@@ -119,9 +119,12 @@ open class IMUIMessageCollectionView: UIView {
   }
     
     open func scrollTo(index:Int) {
-        let scrollIndex = IndexPath(item: index, section: 0)
+        let max = self.chatDataManager.allMsgidArr.count - 1
+        let scrollIndex = IndexPath(item: (index > max ? max : index), section: 0)
         self.messageCollectionView.scrollToItem(at: scrollIndex, at: .top, animated: false)
-        self.messageCollectionView.setContentOffset(CGPoint(x: 0, y: self.messageCollectionView.contentOffset.y-30), animated: false);
+        if(index <= max){
+            self.messageCollectionView.setContentOffset(CGPoint(x: 0, y: self.messageCollectionView.contentOffset.y-30), animated: false);
+        }
     }
   
     
