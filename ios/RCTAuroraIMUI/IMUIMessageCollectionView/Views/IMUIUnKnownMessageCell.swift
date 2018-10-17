@@ -21,7 +21,7 @@ class IMUIUnKnownMessageCell: IMUIBaseMessageCell {
         titleLable.font = UIFont.systemFont(ofSize: (screenW * 14 / 375))
         titleLable.textAlignment = NSTextAlignment.center
         updateBtn.backgroundColor = UIColor.clear
-        updateBtn.addTarget(self, action: #selector(self.clickTapUpdateBtn), for: UIControlEvents.touchUpInside)
+//        updateBtn.addTarget(self, action: #selector(self.clickTapUpdateBtn), for: UIControlEvents.touchUpInside)
         contView.backgroundColor = UIColor.init(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 0.7)
         contView.layer.cornerRadius = 5
         contView.clipsToBounds = true
@@ -44,7 +44,7 @@ class IMUIUnKnownMessageCell: IMUIBaseMessageCell {
     
     func clickTapUpdateBtn() {
         
-        let url:URL = URL.init(string: "https://itunes.apple.com/cn/app/%E9%A3%9E%E9%A9%AC%E9%92%B1%E5%8C%85/id1172713122?mt=8")!
+        let url:URL = URL.init(string: "https://itunes.apple.com/cn/app/%E4%B8%AD%E4%BF%A1%E6%B9%98%E9%9B%85/id1391506755?mt=8")!
         UIApplication.shared.openURL(url)
     }
     
