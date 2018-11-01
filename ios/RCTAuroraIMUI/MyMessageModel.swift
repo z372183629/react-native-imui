@@ -407,7 +407,7 @@ open class RCTMessageModel: IMUIMessageModel {
         break
       case .file:
         messageDic.setValue(RCTMessageModel.kMsgTypeFile, forKey: RCTMessageModel.kMsgKeyMsgType)
-        
+        messageDic.setValue(self.customDict, forKey: RCTMessageModel.kMsgKeyExtend)
       default:
         break
       }
